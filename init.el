@@ -11,9 +11,11 @@
   :init
   (progn
     (projectile-global-mode)
+    (setq projectile-completion-system 'grizzl)
     ; annoying, this does not work at all, making ,pf USELESS and ,pg bad
     ; (add-to-list 'projectile-globally-ignored-files "*.~undo-tree~")
-    (setq projectile-use-native-indexing t))
+    ;(setq projectile-use-native-indexing t)
+    )
   :config
   (progn
     (evil-leader/set-key "pf" 'projectile-find-file)
