@@ -16,6 +16,7 @@
 (depends-on "solarized-theme")
 (depends-on "relative-line-numbers")
 (depends-on "projectile" :git "git@github.com:bbatsov/projectile.git" :ref "master")
+(depends-on "ag")
 (depends-on "grizzl" :git "https://github.com/grizzl/grizzl.git" :ref "master")
 (depends-on "inf-mongo" :git "git://github.com/tobiassvn/inf-mongo.git" :ref "master")
 (depends-on "robe")
