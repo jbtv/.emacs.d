@@ -7,6 +7,17 @@
 
 (require 'use-package)
 
+(use-package magit
+  :init
+  (progn
+    (evil-leader/set-key "gs" 'magit-status)
+    (evil-leader/set-key "gd" 'magit-diff)
+    (evil-leader/set-key "gcm" 'magit-commit)
+    (evil-leader/set-key "gco" 'magit-checkout)
+    (evil-leader/set-key "gl" 'magit-log)
+    (setq magit-last-seen-setup-instructions "1.4.0")
+    ))
+
 (use-package projectile
   :init
   (progn
@@ -267,6 +278,16 @@
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
 
+
+;;;;;;;;;;;;
+;;; ruby ;;;
+;;;;;;;;;;;;
+
+(use-package robe
+  :init
+  (progn
+    (add-hook 'robe-mode-hook 'ac-robe-setup)
+    (add-hook 'ruby-mode-hook 'robe-mode) ))
 
 ;;;;;;;;;;;;;;;;;;;
 ; custom set crap ;
