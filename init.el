@@ -15,8 +15,7 @@
     (evil-leader/set-key "gcm" 'magit-commit)
     (evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
-    (setq magit-last-seen-setup-instructions "1.4.0")
-    ))
+    (setq magit-last-seen-setup-instructions "1.4.0")))
 
 (use-package projectile
   :init
@@ -49,6 +48,7 @@
         (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
         (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
         (evil-leader/set-leader ",")
+        (evil-leader/set-key ",w" 'new-frame)
         (evil-leader/set-key ",d" 'delete-other-windows)
         (evil-leader/set-key "d"  'delete-window)))
     (use-package evil-paredit
