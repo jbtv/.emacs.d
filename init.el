@@ -50,8 +50,8 @@
 
 (defun vilify-magit-status-mode ()
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "") 'magit-stage-item)
-    (define-key map (kbd "") 'magit-unstage-item)
+    ;(define-key map (kbd "") 'magit-stage-item)
+    ;(define-key map (kbd "") 'magit-unstage-item)
     ;(define-key map (kbd "") ')
     ;(define-key map (kbd "") ')
     ;(define-key map (kbd "") ')
@@ -120,53 +120,13 @@
         (evil-leader/set-key ",w" 'new-frame)
         (evil-leader/set-key ",d" 'delete-other-windows)
         (evil-leader/set-key "d"  'delete-window)))
-    (use-package evil-paredit
-      :init (add-hook 'paredit-mode-hook 'evil-paredit-mode))
     (use-package evil-surround
-      :init (global-evil-surround-mode 1)
-      :config
-      (progn
-        (add-to-list 'evil-surround-operator-alist '(evil-paredit-change . change))
-        (add-to-list 'evil-surround-operator-alist '(evil-paredit-delete . delete)))
-      ;http://permalink.gmane.org/gmane.emacs.vim-emulation/1816 is this better? I'd like to be able to do e.g.   d$   and have it preserve the ) at the EOL instead of just complaining
-      ))
+      :init (global-evil-surround-mode 1)))
   :config
   (progn
     (setq evil-cross-lines t)
     (setq evil-move-cursor-back nil)
-    (setq-default truncate-lines t)
-
-
-    (evil-define-motion evil-forward-sexp (count)
-      :type inclusive
-      (if (paredit-in-string-p)
-          (evil-forward-word-end count)
-        (progn
-          (if (looking-at ".\\s-\\|\\s)") (forward-char))
-          (paredit-forward count)
-          (backward-char))))
-
-    (evil-define-motion evil-backward-sexp (count)
-      :type inclusive
-      (if (paredit-in-string-p)
-          (evil-backward-word-begin)
-        (paredit-backward count)))
-
-    (evil-define-motion evil-forward-sexp-word (count)
-      :type exclusive
-      (if (paredit-in-string-p)
-          (evil-forward-word-begin count)
-        (progn (paredit-forward count)
-               (skip-chars-forward "[:space:]"))))
-
-    (define-key evil-motion-state-map "w" 'evil-forward-sexp-word)
-    (define-key evil-motion-state-map "e" 'evil-forward-sexp)
-    (define-key evil-motion-state-map "b" 'evil-backward-sexp)
-
-    (define-key evil-normal-state-map (kbd "M-j" ) 'paredit-forward-slurp-sexp)
-    (define-key evil-normal-state-map (kbd "M-h" ) 'paredit-backward-slurp-sexp)
-    (define-key evil-normal-state-map (kbd "M-k" ) 'paredit-forward-barf-sexp)
-    (define-key evil-normal-state-map (kbd "M-l" ) 'paredit-backward-barf-sexp)))
+    (setq-default truncate-lines t)))
 
 (setq undo-tree-auto-save-history t)
 
@@ -227,13 +187,6 @@
   (progn
     (yas-global-mode 1)
     (use-package clojure-snippets)))
-
-(use-package paredit
-  :init
-  (progn
-    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-    (add-hook 'clojure-mode-hook 'paredit-mode)))
-
 
 ;fixme change to use-package
 (require 'clj-refactor)
