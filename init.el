@@ -11,10 +11,10 @@
   :init
   (progn
     (evil-leader/set-key "gs" 'magit-status)
-    (evil-leader/set-key "gd" 'magit-diff)
-    (evil-leader/set-key "gcm" 'magit-commit)
-    (evil-leader/set-key "gco" 'magit-checkout)
-    (evil-leader/set-key "gl" 'magit-log)
+    ;(evil-leader/set-key "gd" 'magit-diff)
+    ;(evil-leader/set-key "gcm" 'magit-commit)
+    ;(evil-leader/set-key "gco" 'magit-checkout)
+    ;(evil-leader/set-key "gl" 'magit-log)
     (setq magit-last-seen-setup-instructions "1.4.0")))
 
 (use-package projectile
@@ -47,6 +47,13 @@
         (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
         (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+        (evil-leader/set-key-for-mode 'clojure-mode "ee" 'cider-eval-last-sexp)
+        (evil-leader/set-key-for-mode 'clojure-mode "eb" 'cider-eval-buffer)
+        (evil-leader/set-key-for-mode 'clojure-mode "er" 'cider-eval-region)
+        (evil-leader/set-key-for-mode 'clojure-mode "ef" 'cider-eval-defun-at-point)
+        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ee" 'eval-last-sexp)
+        (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
+        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
         (evil-leader/set-leader ",")
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
@@ -249,11 +256,6 @@
     (defun cider-project-reset ()
       (interactive)
       (cider-interactive-eval "(reloaded.repl/reset)"))
-
-    (evil-leader/set-key "eb" 'cider-eval-buffer)
-    (evil-leader/set-key "ee" 'cider-eval-last-sexp)
-    (evil-leader/set-key "er" 'cider-eval-region)
-    (evil-leader/set-key "ef" 'cider-eval-defun-at-point)
 
     (evil-leader/set-key "cd" 'cider-doc)
     (evil-leader/set-key "cc" 'cider-connect)
