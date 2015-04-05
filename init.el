@@ -7,14 +7,69 @@
 
 (require 'use-package)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Magit ... make it sensible for a vim user ... this was not straightfoward
+; the strategy employed is to nuke magit-mode's keymap and set evil-motion-state-map
+; as its parent keymap, and then to hook each magit-*-mode, nuke its keymap,
+; and define bindings to my liking (and I'm discovering and fixing inadequacies as I go)
+
+; for debugging keybindings
+(defun say-poo () (interactive) (message "Poo!"))
+
+(defun vilify-magit-mode ()
+  (defun switch-to-magit-process-buffer () (interactive) (switch-to-buffer "*magit-process*"))
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map evil-motion-state-map)
+    (define-key map ",vl" 'switch-to-magit-process-buffer )
+    (define-key map ",d" 'delete-window ) ; not ideal, this is duplicating defining it with evil-leader ... so far I cannot make evil-leader and magit play together
+    (setq magit-mode-map map)))
+
+(defun vilify-magit-log-mode ()
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-SPC") 'magit-visit-item)
+    (define-key map (kbd "SPC") 'magit-show-item-or-scroll-up)
+    ;(define-key map (kbd "^") 'evil-first-non-blank) ; not necessary? I think I was confused by maps getting reset when the mode becomes active
+    (define-key map (kbd "r") 'magit-revert-item)
+    (define-key map "cp" 'magit-cherry-pick-item)
+    (setq magit-log-mode-map map)))
+
+(defun vilify-magit-commit-mode ()
+  (let ( (map (make-sparse-keymap)) )
+    (define-key map (kbd "RET") 'magit-visit-item)
+    (define-key map (kbd "<tab>") 'magit-toggle-section)
+    (define-key map (kbd "u") 'magit-apply-item)
+    (define-key map (kbd "r") 'magit-revert-item)
+    (define-key map (kbd "n") 'magit-goto-next-section)
+    (define-key map (kbd "p") 'magit-goto-previous-section)
+    (define-key map (kbd "]") 'magit-diff-larger-hunks)
+    (define-key map (kbd "[") 'magit-diff-smaller-hunks)
+    ;(define-key map (kbd ) ')
+    ;(define-key map (kbd ) ')
+    ;(define-key map (kbd ) ')
+    (setq magit-commit-mode-map map)))
+
+(defun vilify-magit-status-mode ()
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "<tab>") 'say-poo)
+    (setq magit-status-mode-map map)))
+
+(add-hook 'magit-mode-hook 'vilify-magit-mode)
+(add-hook 'magit-log-mode-hook 'vilify-magit-log-mode)
+(add-hook 'magit-commit-mode-hook 'vilify-magit-commit-mode)
+(add-hook 'magit-status-mode-hook 'vilify-magit-status-mode)
+
 (use-package magit
   :init
   (progn
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; bindings to enter various magit modes
     (evil-leader/set-key "gs" 'magit-status)
-    ;(evil-leader/set-key "gd" 'magit-diff)
+    (evil-leader/set-key "gd" 'magit-diff-unstaged)
     ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
-    ;(evil-leader/set-key "gl" 'magit-log)
+    (evil-leader/set-key "gl" 'magit-log)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; silence the warning that buffers out of sync with the index will be auto-reverted
     (setq magit-last-seen-setup-instructions "1.4.0")))
 
 (use-package projectile
@@ -53,6 +108,7 @@
         (evil-leader/set-key-for-mode 'clojure-mode "ef" 'cider-eval-defun-at-point)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ee" 'eval-last-sexp)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
+        (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
         (evil-leader/set-leader ",")
         (evil-leader/set-key ",x" 'smex)
