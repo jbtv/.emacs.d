@@ -104,10 +104,10 @@
       :init (global-evil-leader-mode)
       :config
       (progn
-        (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-        (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-        (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-        (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+        ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+        ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+        ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+        ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
         (evil-leader/set-key-for-mode 'clojure-mode "ee" 'cider-eval-last-sexp)
         (evil-leader/set-key-for-mode 'clojure-mode "eb" 'cider-eval-buffer)
         (evil-leader/set-key-for-mode 'clojure-mode "er" 'cider-eval-region)
@@ -183,6 +183,14 @@
 ; clojure ;
 ;;;;;;;;;;;
 
+(use-package evil-smartparens
+  :init
+  (progn
+    (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
+    (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+    (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)))
+
 ; yasnippet (required for certain features of clj-refactor)
 (use-package yasnippet
   :init
@@ -198,6 +206,18 @@
                                (evil-leader/set-key "ral" 'cljr-add-missing-libspec)
                                (evil-leader/set-key "rai" 'cljr-add-import)
                                (evil-leader/set-key "rar" 'cljr-add-require)
+                               (evil-leader/set-key "rci" 'cljr-cycle-if)
+                               (evil-leader/set-key "rdk" 'cljr-destructure-keys)
+                               (evil-leader/set-key "ril" 'cljr-introduce-let)
+                               (evil-leader/set-key "rel" 'cljr-expand-let)
+                               (evil-leader/set-key "ref" 'cljr-extract-function)
+                               (evil-leader/set-key "rfu" 'cljr-find-usages)
+                               (evil-leader/set-key "rml" 'cljr-move-to-let)
+                               (evil-leader/set-key "rpf" 'cljr-promote-function )
+                               (evil-leader/set-key "rrs" 'cljr-rename-symbol)
+                               ;(evil-leader/set-key "" 'cljr-)
+                               ;(evil-leader/set-key "" 'cljr-)
+                               ;(evil-leader/set-key "" 'cljr-)
                                ))
 
 
