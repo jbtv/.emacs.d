@@ -103,6 +103,21 @@
     ; silence the warning that buffers out of sync with the index will be auto-reverted
     (setq magit-last-seen-setup-instructions "1.4.0")))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; shells, embedded external tools, aliases for environment variables
+
+; FIXME ... this is very specific to me and I should find another way of doing this
+(load "/home/blake/.sensitive.el")
+
+(use-package inf-mongo
+  :config
+  (progn
+    (evil-leader/set-key ",mipro" (lambda () (interactive) (inf-mongo mongo-iris-prod-read-only)))
+    (evil-leader/set-key ",mid" (lambda () (interactive) (inf-mongo mongo-iris-dev)))
+    ))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; uber emacs features
 
