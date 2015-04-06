@@ -249,13 +249,14 @@
 (use-package evil-smartparens
   :init
   (progn
-    ; for lisp modes do not treat single-quote as a pairing
-    (sp-with-modes '(clojure-mode emacs-lisp-mode)
-      (sp-local-pair "'" nil :actions nil))
     (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
     (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)))
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
+  :config
+  (progn
+    (sp-with-modes '(clojure-mode emacs-lisp-mode)
+      (sp-local-pair "'" nil :actions nil)))) ; for lisp modes do not treat single-quote as a pairing
 
 ; yasnippet (required for certain features of clj-refactor)
 ;(use-package yasnippet
