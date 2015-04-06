@@ -8,6 +8,7 @@
 (depends-on "evil-surround")
 (depends-on "evil-smartparens")
 (depends-on "ace-jump-mode")
+(depends-on "aggressive-indent")
 ;(depends-on "helm-swoop") ; find the right occurrence of search term with many occurrences
 ;(depends-on "minimap") ; sublime-style ... maybe give it a shot
 ;(depends-on "anzu") ; display match-count and match-index for searches

@@ -105,6 +105,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; uber emacs features
+
 (use-package ace-jump-mode
   :init
   (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-two-chars-mode)
@@ -124,6 +125,13 @@
       (ace-jump-do (regexp-quote (concat (char-to-string query-char)
                                          (char-to-string query-char-2)))))
     ))
+
+(use-package aggressive-indent
+  :init
+  (progn
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+    (add-hook 'css-mode-hook #'aggressive-indent-mode)))
+
 
 (use-package projectile
   :init
