@@ -49,7 +49,7 @@
     (define-key map (kbd "RET") 'magit-visit-item)
     (define-key map (kbd "u")   'magit-apply-item)
     (define-key map (kbd "r")   'magit-revert-item)
-    (define-key map (kbd "C-\\") 'git-commit-commit)
+    
     ;(define-key map (kbd ) ')
     ;(define-key map (kbd ) ')
     ;(define-key map (kbd ) ')
@@ -73,8 +73,17 @@
     ;(define-key map (kbd "") ')
     (setq magit-diff-mode-map map)))
 
+(defun vilify-git-commit-mode ()
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-\\") 'git-commit-commit)
+    ;(define-key map (kbd "") ')
+    ;(define-key map (kbd "") ')
+    ;(define-key map (kbd "") ')
+    (setq git-commit-mode-map map)))
+
 (add-hook 'magit-mode-hook 'vilify-magit-mode)
 (add-hook 'magit-log-mode-hook 'vilify-magit-log-mode)
+(add-hook 'git-commit-mode-hook 'vilify-git-commit-mode)
 (add-hook 'magit-commit-mode-hook 'vilify-magit-commit-mode)
 (add-hook 'magit-status-mode-hook 'vilify-magit-status-mode)
 (add-hook 'magit-diff-mode-hook 'vilify-magit-diff-mode)
