@@ -141,7 +141,6 @@
     (evil-leader/set-key "pg" 'projectile-grep)
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
-;(evil-leader/in-all-states) ; not working
 
 (use-package evil
   :init
@@ -152,6 +151,7 @@
       :config
       (progn
         (evil-leader/set-leader ",")
+        ;(evil-leader/in-all-states) ; not working, try again
         ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
         ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
