@@ -395,16 +395,17 @@
 (use-package robe
   :init
   (progn
+    (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+      (rvm-activate-corresponding-ruby))
+
     (evil-define-key 'normal robe-mode-map (kbd "g f") 'robe-jump)
     (evil-define-key 'normal robe-mode-map (kbd "g d") 'robe-doc)
-
+    
     (add-hook 'robe-mode-hook 'ac-robe-setup) ; TODOcompletion with company
-    (add-hook 'ruby-mode-hook 'robe-mode) )
+    (add-hook 'ruby-mode-hook 'robe-mode))
   :config
   (progn
-    (diminish 'robe-mode " R0β3")
-    )
-  )
+    (diminish 'robe-mode " R0β3")))
 
 (use-package rinari
   :init
