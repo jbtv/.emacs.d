@@ -177,8 +177,10 @@
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
         (evil-leader/set-key ",w" 'new-frame)
-        (evil-leader/set-key ",d" 'delete-other-windows)
-        (evil-leader/set-key "d"  'delete-window)))
+        (evil-leader/set-key ",dd" 'delete-other-windows)
+        (evil-leader/set-key "dd"  'delete-window)
+        (evil-leader/set-key "do"  'kill-buffer-and-window)
+	))
     (use-package evil-surround
       :init (global-evil-surround-mode 1)))
   :config
