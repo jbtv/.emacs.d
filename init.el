@@ -141,12 +141,13 @@
                                          (char-to-string query-char-2)))))
     ))
 
-(use-package aggressive-indent
-  :init
-  (progn
-    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-    (add-hook 'css-mode-hook #'aggressive-indent-mode)))
+; FIXME want it ... but disabled it because it fucks with comments when I move over them with evil motions
+;(use-package aggressive-indent
+;  :init
+;  (progn
+;    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+;    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;    (add-hook 'css-mode-hook #'aggressive-indent-mode)))
 
 
 (use-package projectile
