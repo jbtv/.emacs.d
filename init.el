@@ -166,30 +166,19 @@
 ;; autocomplete ;;
 ;;;;;;;;;;;;;;;;;;
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
+(use-package company
+  :init (global-company-mode)
+;(add-hook 'cider-repl-mode-hook #'company-mode)
+;(add-hook 'cider-mode-hook #'company-mode)
+  :config
+  (progn
+    (defun indent-or-complete ()
+      (interactive)
+      (if (looking-at "\\_>")
+          (company-complete-common)
+        (indent-according-to-mode)))
 
-(require 'ac-cider)
-(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-(add-hook 'cider-mode-hook 'ac-cider-setup)
-(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-(eval-after-load "auto-complete"
-  '(progn
-     (add-to-list 'ac-modes 'cider-mode)
-     (add-to-list 'ac-modes 'cider-repl-mode)))
-
-;(use-package company
-;  :init (global-company-mode)
-;  :config
-;  (progn
-;    (defun indent-or-complete ()
-;      (interactive)
-;      (if (looking-at "\\_>")
-;          (company-complete-common)
-;        (indent-according-to-mode)))
-;
-;    (global-set-key "\t" 'indent-or-complete)))
+    (global-set-key "\t" 'indent-or-complete)))
 
 ;;;;;;;;;;;
 ; visuals ;
@@ -218,11 +207,11 @@
     (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)))
 
 ; yasnippet (required for certain features of clj-refactor)
-(use-package yasnippet
-  :init
-  (progn
-    (yas-global-mode 1)
-    (use-package clojure-snippets)))
+;(use-package yasnippet
+;  :init
+;  (progn
+;    (yas-global-mode 1)
+;    (use-package clojure-snippets)))
 
 ;fixme change to use-package
 (require 'clj-refactor)
