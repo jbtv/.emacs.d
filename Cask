@@ -7,6 +7,7 @@
 (depends-on "evil-leader")
 (depends-on "evil-surround")
 (depends-on "evil-smartparens")
+(depends-on "ace-jump-mode")
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")

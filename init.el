@@ -103,6 +103,28 @@
     ; silence the warning that buffers out of sync with the index will be auto-reverted
     (setq magit-last-seen-setup-instructions "1.4.0")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; uber emacs features
+(use-package ace-jump-mode
+  :init
+  (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-two-chars-mode)
+  :config
+  (progn
+    (defun ace-jump-two-chars-mode (query-char query-char-2)
+      "AceJump two chars mode"
+      (interactive (list (read-char "First Char:")
+                         (read-char "Second:")))
+    
+      (if (eq (ace-jump-char-category query-char) 'other)
+        (error "[AceJump] Non-printable character"))
+    
+      ;; others : digit , alpha, punc
+      (setq ace-jump-query-char query-char)
+      (setq ace-jump-current-mode 'ace-jump-char-mode)
+      (ace-jump-do (regexp-quote (concat (char-to-string query-char)
+                                         (char-to-string query-char-2)))))
+    ))
+
 (use-package projectile
   :init
   (progn
