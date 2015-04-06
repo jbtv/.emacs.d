@@ -220,6 +220,9 @@
 ;(add-hook 'cider-mode-hook #'company-mode)
   :config
   (progn
+    (eval-after-load 'company
+      '(push 'company-robe company-backends))
+
     (defun indent-or-complete ()
       (interactive)
       (if (looking-at "\\_>")
@@ -392,8 +395,21 @@
 (use-package robe
   :init
   (progn
-    (add-hook 'robe-mode-hook 'ac-robe-setup)
-    (add-hook 'ruby-mode-hook 'robe-mode) ))
+    (evil-define-key 'normal robe-mode-map (kbd "g f") 'robe-jump)
+    (evil-define-key 'normal robe-mode-map (kbd "g d") 'robe-doc)
+
+    (add-hook 'robe-mode-hook 'ac-robe-setup) ; TODOcompletion with company
+    (add-hook 'ruby-mode-hook 'robe-mode) )
+  :config
+  (progn
+    (diminish 'robe-mode " R0β3")
+    )
+  )
+
+(use-package rinari
+  :init
+  (progn
+    ))
 
 ;;;;;;;;;;;;;;;;;;;
 ; custom set crap ;

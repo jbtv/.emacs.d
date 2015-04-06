@@ -17,6 +17,7 @@
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")
+(depends-on "rinari")
 (depends-on "company")
 (depends-on "solarized-theme")
 (depends-on "relative-line-numbers")
