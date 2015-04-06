@@ -26,7 +26,7 @@
     (define-key map (kbd "SPC") 'magit-toggle-section)
     (define-key map (kbd "C-n") 'magit-goto-next-section)
     (define-key map (kbd "C-p") 'magit-goto-previous-section)
-    (define-key map ",d" 'delete-window ) ; not ideal, this is duplicating defining it with evil-leader ... so far I cannot make evil-leader and magit play together
+    (define-key map ",dd" 'delete-window ) ; not ideal, this is duplicating defining it with evil-leader ... so far I cannot make evil-leader and magit play together
     (setq magit-mode-map map)))
 
 (defun vilify-magit-process-mode ()
