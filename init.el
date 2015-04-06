@@ -29,6 +29,12 @@
     (define-key map ",d" 'delete-window ) ; not ideal, this is duplicating defining it with evil-leader ... so far I cannot make evil-leader and magit play together
     (setq magit-mode-map map)))
 
+(defun vilify-magit-process-mode ()
+  (defun switch-to-magit-process-buffer () (interactive) (switch-to-buffer "*magit-process*"))
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map evil-motion-state-map)
+    (setq magit-process-mode-map map)))
+
 (defun vilify-magit-log-mode ()
   (let ((map (make-sparse-keymap)))
     ;(define-key map (kbd "C-SPC") 'magit-visit-item)
@@ -71,6 +77,7 @@
 (add-hook 'magit-commit-mode-hook 'vilify-magit-commit-mode)
 (add-hook 'magit-status-mode-hook 'vilify-magit-status-mode)
 (add-hook 'magit-diff-mode-hook 'vilify-magit-diff-mode)
+(add-hook 'magit-process-mode-hook 'vilify-magit-process-mode)
 
 (use-package magit
   :init
