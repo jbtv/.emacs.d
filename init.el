@@ -217,7 +217,7 @@
 (require 'clj-refactor)
 (add-hook 'clojure-mode-hook (lambda ()
                                (clj-refactor-mode 1)
-                               (setq cljr-magic-requires nil) ; turned this off because it is _crazy_ slow even with an empty file!
+                               (setq cljr-magic-requires t) ; turned this off because it is _crazy_ slow even with an empty file!
                                (evil-leader/set-key "ral" 'cljr-add-missing-libspec)
                                (evil-leader/set-key "rai" 'cljr-add-import)
                                (evil-leader/set-key "rar" 'cljr-add-require)
