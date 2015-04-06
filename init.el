@@ -20,6 +20,8 @@
   (defun switch-to-magit-process-buffer () (interactive) (switch-to-buffer "*magit-process*"))
   (let ((map (make-sparse-keymap)))
     (set-keymap-parent map evil-motion-state-map)
+    (define-key map (kbd "]")   'magit-diff-larger-hunks)
+    (define-key map (kbd "[")   'magit-diff-smaller-hunks)
     (define-key map ",vl" 'switch-to-magit-process-buffer )
     (define-key map (kbd "SPC") 'magit-toggle-section)
     (define-key map (kbd "C-n") 'magit-goto-next-section)
@@ -41,8 +43,6 @@
     (define-key map (kbd "RET") 'magit-visit-item)
     (define-key map (kbd "u")   'magit-apply-item)
     (define-key map (kbd "r")   'magit-revert-item)
-    (define-key map (kbd "]")   'magit-diff-larger-hunks)
-    (define-key map (kbd "[")   'magit-diff-smaller-hunks)
     (define-key map (kbd "C-\\") 'git-commit-commit)
     ;(define-key map (kbd ) ')
     ;(define-key map (kbd ) ')
@@ -59,10 +59,18 @@
     ;(define-key map (kbd "") ')
     (setq magit-status-mode-map map)))
 
+(defun vilify-magit-diff-mode ()
+  (let ((map (make-sparse-keymap)))
+    ;(define-key map (kbd "") ')
+    ;(define-key map (kbd "") ')
+    ;(define-key map (kbd "") ')
+    (setq magit-diff-mode-map map)))
+
 (add-hook 'magit-mode-hook 'vilify-magit-mode)
 (add-hook 'magit-log-mode-hook 'vilify-magit-log-mode)
 (add-hook 'magit-commit-mode-hook 'vilify-magit-commit-mode)
 (add-hook 'magit-status-mode-hook 'vilify-magit-status-mode)
+(add-hook 'magit-diff-mode-hook 'vilify-magit-diff-mode)
 
 (use-package magit
   :init
@@ -104,6 +112,7 @@
       :init (global-evil-leader-mode)
       :config
       (progn
+        (evil-leader/set-leader ",")
         ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
         ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
@@ -116,7 +125,7 @@
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
-        (evil-leader/set-leader ",")
+        (evil-leader/set-key ",b" 'list-buffers)
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
         (evil-leader/set-key ",w" 'new-frame)
