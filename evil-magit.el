@@ -35,7 +35,7 @@
       ;(define-key map (kbd "M-s") 'magit-show-level-4)
       ;(define-key map (kbd "M-S") 'magit-show-level-4-all)
       ;(define-key map (kbd "g") 'magit-refresh)
-      ;(define-key map (kbd "G") 'magit-refresh-all)
+      (define-key map (kbd "C-,") 'magit-refresh-all)
       ;(define-key map (kbd "?") 'magit-key-mode-popup-dispatch)
       ;(define-key map (kbd ":") 'magit-git-command)
       ;(define-key map (kbd "C-x 4 a") 'magit-add-change-log-entry-other-window)
@@ -131,7 +131,7 @@
       map)
     "Keymap for `magit-commit-mode'.")
 
-  (define-key 'git-commit-mode-map (kbd "<C-return>") 'git-commit-commit)
+  (define-key git-commit-mode-map (kbd "<C-return>") 'git-commit-commit)
   
   (message "defvar magit-section-jump-mode-map")
   (defvar magit-section-jump-map
@@ -151,10 +151,10 @@
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
       
-      ;(define-key map (kbd "s") 'magit-stage-item)
-      ;(define-key map (kbd "u") 'magit-unstage-item)
-      ;(define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
-      ;(define-key map (kbd "I") 'magit-ignore-item-locally)
+      (define-key map (kbd "s") 'magit-stage-item)
+      (define-key map (kbd "u") 'magit-unstage-item)
+      (define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
+      (define-key map (kbd "I") 'magit-ignore-item-locally)
 
       ; I _think_ this will be a good tradeoff
       ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
