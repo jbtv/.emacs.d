@@ -23,11 +23,18 @@
     ; bindings to enter various magit modes
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gd" 'magit-diff-unstaged)
+    
     ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
     (set-evil-magit-bindings)
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; start commit with insert mode
+    (evil-set-initial-state 'git-commit-mode 'insert)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; silence the warning that buffers out of sync with the index will be auto-reverted
     (setq magit-last-seen-setup-instructions "1.4.0"))
