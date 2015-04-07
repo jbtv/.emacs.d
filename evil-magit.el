@@ -43,8 +43,13 @@
       ;(define-key map (kbd "SPC") 'magit-show-item-or-scroll-up)
       ;(define-key map (kbd "DEL") 'magit-show-item-or-scroll-down)
       ;(define-key map (kbd "C-w") 'magit-copy-item-as-kill)
+
+      ; I am going to ignore magit-rigid-key-bindings for now
+      ; the behavior I want for evil-magit is "rigid" in this way ... no popup
+
       ;(cond (magit-rigid-key-bindings
-      ;       (define-key map (kbd "c") 'magit-commit)
+
+      (define-key map (kbd ",,c") 'magit-commit)
       ;       (define-key map (kbd "m") 'magit-merge)
       ;       (define-key map (kbd "b") 'magit-checkout)
       ;       (define-key map (kbd "M") 'magit-branch-manager)
@@ -53,12 +58,14 @@
       ;       (define-key map (kbd "F") 'magit-pull)
       ;       (define-key map (kbd "J") 'magit-apply-mailbox)
       ;       (define-key map (kbd "!") 'magit-git-command-topdir)
-      ;       (define-key map (kbd "P") 'magit-push)
-      ;       (define-key map (kbd "t") 'magit-tag)
-      ;       (define-key map (kbd "l") 'magit-log)
+      (define-key map (kbd ",,ps") 'magit-push)
+      (define-key map (kbd ",,t") 'magit-tag)
+      (define-key map (kbd ",,l") 'magit-log)
       ;       (define-key map (kbd "o") 'magit-submodule-update)
       ;       (define-key map (kbd "B") 'undefined)
-      ;       (define-key map (kbd "z") 'magit-stash))
+      (define-key map (kbd ",,s") 'magit-key-mode-popup-stashing) ; for me to see what the popup stuff is like
+      )
+
       ;      (t
       ;       (define-key map (kbd "c") 'magit-key-mode-popup-committing)
       ;       (define-key map (kbd "m") 'magit-key-mode-popup-merging)
@@ -75,19 +82,18 @@
       ;       (define-key map (kbd "o") 'magit-key-mode-popup-submodule)
       ;       (define-key map (kbd "B") 'magit-key-mode-popup-bisecting)
       ;       (define-key map (kbd "z") 'magit-key-mode-popup-stashing)))
-      ;(define-key map (kbd "$") 'magit-process)
-      ;(evil-leader/set-key-for-mode 'magit-status-mode "vl" 'magit-process)
       (define-key map ",vl" 'magit-process )  ; FIXME integrate with evil-leader, not everyone uses ","
       ;(define-key map (kbd "E") 'magit-interactive-rebase)
       ;(define-key map (kbd "R") 'magit-rebase-step)
       ;(define-key map (kbd "e") 'magit-ediff)
-      ;(define-key map (kbd "w") 'magit-wazzup)
+      (define-key map (kbd ",,w") 'magit-wazzup)
       ;(define-key map (kbd "y") 'magit-cherry)
       ;(define-key map (kbd "q") 'magit-mode-quit-window)
-      ;(define-key map (kbd "x") 'magit-reset-head)
-      ;(define-key map (kbd "v") 'magit-revert-item)
-      ;(define-key map (kbd "a") 'magit-apply-item)
-      ;(define-key map (kbd "A") 'magit-cherry-pick-item)
+      (define-key map (kbd ",,,r") 'magit-reset-head-hard)
+      (define-key map (kbd ",,r") 'magit-reset-head)
+      (define-key map (kbd ",r") 'magit-revert-item)
+      (define-key map (kbd ",a") 'magit-apply-item)
+      (define-key map (kbd ",cp") 'magit-cherry-pick-item)
       ;(define-key map (kbd "d") 'magit-diff-working-tree)
       ;(define-key map (kbd "D") 'magit-diff)
       (define-key map (kbd "[") 'magit-diff-smaller-hunks)
@@ -96,9 +102,15 @@
       
       ;(define-key map (kbd "h") 'magit-key-mode-popup-diff-options)
       ;(define-key map (kbd "H") 'magit-diff-toggle-refine-hunk)
-      ;(define-key map (kbd "S") 'magit-stage-all)
-      ;(define-key map (kbd "U") 'magit-unstage-all)
-      ;(define-key map (kbd "X") 'magit-reset-working-tree)
+
+      ; this one clobbers evil-sp-change-whole-line
+      (define-key map (kbd "S") 'magit-stage-all)
+
+      (define-key map (kbd "U") 'magit-unstage-all)
+
+      ; clobbers sp-backward-delete-char
+      (define-key map (kbd "X") 'magit-reset-working-tree)
+
       ;(define-key map (kbd "C-c C-c") 'magit-key-mode-popup-dispatch)
       ;(define-key map (kbd "C-c C-e") 'magit-key-mode-popup-dispatch)
       map)
@@ -107,44 +119,46 @@
   (defvar magit-status-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "n") 'say-poo)
-      (define-key map (kbd "p") '(lambda () (interactive) (message "WOOOH")))
       map)
     "BLAKE's EVIL Parent keymap for all keymaps of modes derived from `magit-mode'.")
 
   (defvar magit-commit-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "C-c C-b") 'magit-go-backward)
-      (define-key map (kbd "C-c C-f") 'magit-go-forward)
-      (define-key map (kbd "SPC") 'scroll-up)
-      (define-key map (kbd "DEL") 'scroll-down)
-      (define-key map (kbd "j") 'magit-jump-to-diffstats)
+      (define-key map (kbd "C-p") 'magit-go-backward) ; experiment...
+      (define-key map (kbd "C-n") 'magit-go-forward)
+      ;(define-key map (kbd "SPC") 'scroll-up)
+      ;(define-key map (kbd "DEL") 'scroll-down)
+      ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
       map)
     "Keymap for `magit-commit-mode'.")
   
   (defvar magit-status-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "s") 'magit-stage-item)
-      (define-key map (kbd "u") 'magit-unstage-item)
-      (define-key map (kbd "i") 'magit-ignore-item)
-      (define-key map (kbd "I") 'magit-ignore-item-locally)
-      (define-key map (kbd "j") 'magit-section-jump-map)
-      (define-key map (kbd ".") 'magit-mark-item)
-      (define-key map (kbd "=") 'magit-diff-with-mark)
-      (define-key map (kbd "k") 'magit-discard-item)
-      (define-key map (kbd "C") 'magit-commit-add-log)
+      ;(define-key map (kbd "s") 'magit-stage-item)
+      ;(define-key map (kbd "u") 'magit-unstage-item)
+      ;(define-key map (kbd "i") 'magit-ignore-item)
+      ;(define-key map (kbd "I") 'magit-ignore-item-locally)
+
+      ; I _think_ this will be a good tradeoff
+      ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
+      (define-key map (kbd "g") 'magit-section-jump-map)
+
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "k") 'magit-discard-item)
+      ;(define-key map (kbd "C") 'magit-commit-add-log)
       map)
     "Keymap for `magit-status-mode'.")
 
   (defvar magit-log-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd ".") 'magit-mark-item)
-      (define-key map (kbd "=") 'magit-diff-with-mark)
-      (define-key map (kbd "e") 'magit-log-show-more-entries)
-      (define-key map (kbd "h") 'magit-log-toggle-margin)
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "e") 'magit-log-show-more-entries)
+      ;(define-key map (kbd "h") 'magit-log-toggle-margin)
       map)
     "Keymap for `magit-log-mode'.")
   
@@ -163,31 +177,31 @@
   (defvar magit-diff-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "C-c C-b") 'magit-go-backward)
-      (define-key map (kbd "C-c C-f") 'magit-go-forward)
-      (define-key map (kbd "SPC") 'scroll-up)
-      (define-key map (kbd "DEL") 'scroll-down)
-      (define-key map (kbd "j") 'magit-jump-to-diffstats)
+      (define-key map (kbd "C-p") 'magit-go-backward)
+      (define-key map (kbd "C-n") 'magit-go-forward)
+      ;(define-key map (kbd "SPC") 'scroll-up)
+      ;(define-key map (kbd "DEL") 'scroll-down)
+      ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
       map)
     "Keymap for `magit-diff-mode'.")
   
   (defvar magit-wazzup-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd ".") 'magit-mark-item)
-      (define-key map (kbd "=") 'magit-diff-with-mark)
-      (define-key map (kbd "i") 'magit-ignore-item)
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "i") 'magit-ignore-item)
       map)
     "Keymap for `magit-wazzup-mode'.")
   
-  (defvar magit-branch-manager-mode-map
+  (defvar magit-branch-manager-mode-map ; INTERESTING play with this
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "c") 'magit-create-branch)
-      (define-key map (kbd "a") 'magit-add-remote)
-      (define-key map (kbd "r") 'magit-rename-item)
-      (define-key map (kbd "k") 'magit-discard-item)
-      (define-key map (kbd "T") 'magit-change-what-branch-tracks)
+      ;(define-key map (kbd "c") 'magit-create-branch)
+      ;(define-key map (kbd "a") 'magit-add-remote)
+      ;(define-key map (kbd "r") 'magit-rename-item)
+      ;(define-key map (kbd "k") 'magit-discard-item)
+      ;(define-key map (kbd "T") 'magit-change-what-branch-tracks)
       map)
     "Keymap for `magit-branch-manager-mode'.")
   
