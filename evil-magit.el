@@ -66,7 +66,8 @@
       ;       (define-key map (kbd "o") 'magit-submodule-update)
       ;       (define-key map (kbd "B") 'undefined)
       (define-key map (kbd ",,s") 'magit-key-mode-popup-stashing) ; for me to see what the popup stuff is like
-       
+      
+      ;(define-key map (kbd "<C-return>") 'magit-key-mode-popup-committing) ; change to git-commit-commit ?
 
       ;      (t
       ;       (define-key map (kbd "c") 'magit-key-mode-popup-committing)
@@ -129,6 +130,8 @@
       ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
       map)
     "Keymap for `magit-commit-mode'.")
+
+  (define-key 'git-commit-mode-map (kbd "<C-return>") 'git-commit-commit)
   
   (message "defvar magit-section-jump-mode-map")
   (defvar magit-section-jump-map
