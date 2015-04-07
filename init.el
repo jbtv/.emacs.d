@@ -102,7 +102,6 @@
   (progn
     (evil-leader/set-key "pf" 'projectile-find-file)
     (evil-leader/set-key "pa" 'projectile-ag)
-    (evil-leader/set-key "pg" 'projectile-grep)
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
 
@@ -129,13 +128,15 @@
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
-        (evil-leader/set-key ",b" 'list-buffers)
+        (evil-leader/set-key "b." 'previous-buffer)
+        (evil-leader/set-key "b," 'next-buffer)
+        (evil-leader/set-key "bl" 'list-buffers)
+        (evil-leader/set-key "bd" 'kill-buffer)
+        (evil-leader/set-key "bk" 'kill-buffer-and-window)
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
-        (evil-leader/set-key ",w" 'new-frame)
-        (evil-leader/set-key ",dd" 'delete-other-windows)
-        (evil-leader/set-key "dd"  'delete-window)
-        (evil-leader/set-key "do"  'kill-buffer-and-window)
+        (evil-leader/set-key ",w" 'make-frame)
+        (evil-leader/set-key ",do" 'delete-other-windows)
 	))
     (use-package evil-surround
       :init (global-evil-surround-mode 1)))
