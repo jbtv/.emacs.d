@@ -1,5 +1,6 @@
 
 (defun set-evil-magit-bindings ()
+  (message "Set evil magic")
 					; the main differences of this magit-mode-map AOT the one from magit.el are:
 					; instead of starting with a (make-keymap) we start by copying the evil-motion-state-map
 					; also define "," as evil-leader--default-map to allow leader commands to work in magit modes
@@ -10,6 +11,7 @@
 					; if I find one which definitely clobbers a binding in a way that I think will confuse vim lovers, I change it to keep it at least fairly free of awful surprises
 					; OTHERWISE I leave the binding alone to keep the differences minimal
 					; this process is ongoing, at this point lots of important magit commands are still unavailable
+  (message "defvar magit-mode-map")
   (defvar magit-mode-map
     (let ((map (copy-keymap evil-motion-state-map)))
       (define-key map "," evil-leader--default-map)
@@ -64,7 +66,7 @@
       ;       (define-key map (kbd "o") 'magit-submodule-update)
       ;       (define-key map (kbd "B") 'undefined)
       (define-key map (kbd ",,s") 'magit-key-mode-popup-stashing) ; for me to see what the popup stuff is like
-      )
+       
 
       ;      (t
       ;       (define-key map (kbd "c") 'magit-key-mode-popup-committing)
@@ -116,12 +118,7 @@
       map)
     "BLAKE's EVIL Parent keymap for all keymaps of modes derived from `magit-mode'.") 
 
-  (defvar magit-status-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      map)
-    "BLAKE's EVIL Parent keymap for all keymaps of modes derived from `magit-mode'.")
-
+  (message "defvar magit-commit-mode-map")
   (defvar magit-commit-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -133,84 +130,7 @@
       map)
     "Keymap for `magit-commit-mode'.")
   
-  (defvar magit-status-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      ;(define-key map (kbd "s") 'magit-stage-item)
-      ;(define-key map (kbd "u") 'magit-unstage-item)
-      ;(define-key map (kbd "i") 'magit-ignore-item)
-      ;(define-key map (kbd "I") 'magit-ignore-item-locally)
-
-      ; I _think_ this will be a good tradeoff
-      ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
-      (define-key map (kbd "g") 'magit-section-jump-map)
-
-      ;(define-key map (kbd ".") 'magit-mark-item)
-      ;(define-key map (kbd "=") 'magit-diff-with-mark)
-      ;(define-key map (kbd "k") 'magit-discard-item)
-      ;(define-key map (kbd "C") 'magit-commit-add-log)
-      map)
-    "Keymap for `magit-status-mode'.")
-
-  (defvar magit-log-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      ;(define-key map (kbd ".") 'magit-mark-item)
-      ;(define-key map (kbd "=") 'magit-diff-with-mark)
-      ;(define-key map (kbd "e") 'magit-log-show-more-entries)
-      ;(define-key map (kbd "h") 'magit-log-toggle-margin)
-      map)
-    "Keymap for `magit-log-mode'.")
-  
-  (defvar magit-cherry-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      map)
-    "Keymap for `magit-cherry-mode'.")
-  
-  (defvar magit-reflog-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-log-mode-map)
-      map)
-    "Keymap for `magit-reflog-mode'.")
-  
-  (defvar magit-diff-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      (define-key map (kbd "C-p") 'magit-go-backward)
-      (define-key map (kbd "C-n") 'magit-go-forward)
-      ;(define-key map (kbd "SPC") 'scroll-up)
-      ;(define-key map (kbd "DEL") 'scroll-down)
-      ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
-      map)
-    "Keymap for `magit-diff-mode'.")
-  
-  (defvar magit-wazzup-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      ;(define-key map (kbd ".") 'magit-mark-item)
-      ;(define-key map (kbd "=") 'magit-diff-with-mark)
-      ;(define-key map (kbd "i") 'magit-ignore-item)
-      map)
-    "Keymap for `magit-wazzup-mode'.")
-  
-  (defvar magit-branch-manager-mode-map ; INTERESTING play with this
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      ;(define-key map (kbd "c") 'magit-create-branch)
-      ;(define-key map (kbd "a") 'magit-add-remote)
-      ;(define-key map (kbd "r") 'magit-rename-item)
-      ;(define-key map (kbd "k") 'magit-discard-item)
-      ;(define-key map (kbd "T") 'magit-change-what-branch-tracks)
-      map)
-    "Keymap for `magit-branch-manager-mode'.")
-  
-  (defvar magit-process-mode-map
-    (let ((map (make-sparse-keymap)))
-      (set-keymap-parent map magit-mode-map)
-      map)
-    "Keymap for `magit-process-mode'.")
-  
+  (message "defvar magit-section-jump-mode-map")
   (defvar magit-section-jump-map
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "z") 'magit-jump-to-stashes)
@@ -223,4 +143,92 @@
       map)
     "Submap for jumping to sections in `magit-status-mode'.")
 
+  (message "defvar magit-status-mode-map")
+  (defvar magit-status-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      
+      ;(define-key map (kbd "s") 'magit-stage-item)
+      ;(define-key map (kbd "u") 'magit-unstage-item)
+      ;(define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
+      ;(define-key map (kbd "I") 'magit-ignore-item-locally)
+
+      ; I _think_ this will be a good tradeoff
+      ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
+      (define-key map (kbd "g") 'magit-section-jump-map)
+      
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "k") 'magit-discard-item)
+      ;(define-key map (kbd "C") 'magit-commit-add-log)
+      map)
+    "Keymap for `magit-status-mode'.")
+
+  (message "defvar magit-log-mode-map")
+  (defvar magit-log-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "e") 'magit-log-show-more-entries)
+      ;(define-key map (kbd "h") 'magit-log-toggle-margin)
+      map)
+    "Keymap for `magit-log-mode'.")
+  
+  (message "defvar magit-cherry-mode-map")
+  (defvar magit-cherry-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      map)
+    "Keymap for `magit-cherry-mode'.")
+  
+  (message "defvar magit-reflog-mode-map")
+  (defvar magit-reflog-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-log-mode-map)
+      map)
+    "Keymap for `magit-reflog-mode'.")
+  
+  (message "defvar magit-diff-mode-map")
+  (defvar magit-diff-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      (define-key map (kbd "C-p") 'magit-go-backward)
+      (define-key map (kbd "C-n") 'magit-go-forward)
+      ;(define-key map (kbd "SPC") 'scroll-up)
+      ;(define-key map (kbd "DEL") 'scroll-down)
+      ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
+      map)
+    "Keymap for `magit-diff-mode'.")
+  
+  (message "defvar magit-wazzup-mode-map")
+  (defvar magit-wazzup-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      ;(define-key map (kbd ".") 'magit-mark-item)
+      ;(define-key map (kbd "=") 'magit-diff-with-mark)
+      ;(define-key map (kbd "i") 'magit-ignore-item)
+      map)
+    "Keymap for `magit-wazzup-mode'.")
+  
+  (message "defvar magit-branch-manager-mode-map")
+  (defvar magit-branch-manager-mode-map ; INTERESTING play with this
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      ;(define-key map (kbd "c") 'magit-create-branch)
+      ;(define-key map (kbd "a") 'magit-add-remote)
+      ;(define-key map (kbd "r") 'magit-rename-item)
+      ;(define-key map (kbd "k") 'magit-discard-item)
+      ;(define-key map (kbd "T") 'magit-change-what-branch-tracks)
+      map)
+    "Keymap for `magit-branch-manager-mode'.")
+  
+  (message "defvar magit-process-mode-map")
+  (defvar magit-process-mode-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      map)
+    "Keymap for `magit-process-mode'.")
+  
+  
   )
