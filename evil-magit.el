@@ -1,9 +1,18 @@
 
 (defun set-evil-magit-bindings ()
-  ;(evil-set-initial-state 'magit-mode 'motion)
+					; the main differences of this magit-mode-map AOT the one from magit.el are:
+					; instead of starting with a (make-keymap) we start by copying the evil-motion-state-map
+					; also define "," as evil-leader--default-map to allow leader commands to work in magit modes
+					; all the magit-*-mode maps have this as their parent still
+					; I began by commenting out every define-key (since some of them clobber evil motion bindings)
+					; then started enabling them again a few at a time and see how it feels
+					; if I find one for which there is a more intuitive binding for vim lovers, I change it from the magit default
+					; if I find one which definitely clobbers a binding in a way that I think will confuse vim lovers, I change it to keep it at least fairly free of awful surprises
+					; OTHERWISE I leave the binding alone to keep the differences minimal
+					; this process is ongoing, at this point lots of important magit commands are still unavailable
   (defvar magit-mode-map
     (let ((map (copy-keymap evil-motion-state-map)))
-      ;(set-keymap-parent map evil-motion-state-map)
+      (define-key map "," evil-leader--default-map)
       (define-key map (kbd "n") 'magit-goto-next-section)
       (define-key map (kbd "p") 'magit-goto-previous-section)
       (define-key map (kbd "^") 'magit-goto-parent-section)
@@ -26,7 +35,7 @@
       ;(define-key map (kbd "g") 'magit-refresh)
       ;(define-key map (kbd "G") 'magit-refresh-all)
       ;(define-key map (kbd "?") 'magit-key-mode-popup-dispatch)
-      (define-key map (kbd ":") 'magit-git-command)
+      ;(define-key map (kbd ":") 'magit-git-command)
       ;(define-key map (kbd "C-x 4 a") 'magit-add-change-log-entry-other-window)
       ;(define-key map (kbd "L") 'magit-add-change-log-entry)
       (define-key map (kbd "RET") 'magit-visit-item)
@@ -67,6 +76,8 @@
       ;       (define-key map (kbd "B") 'magit-key-mode-popup-bisecting)
       ;       (define-key map (kbd "z") 'magit-key-mode-popup-stashing)))
       ;(define-key map (kbd "$") 'magit-process)
+      ;(evil-leader/set-key-for-mode 'magit-status-mode "vl" 'magit-process)
+      (define-key map ",vl" 'magit-process )  ; FIXME integrate with evil-leader, not everyone uses ","
       ;(define-key map (kbd "E") 'magit-interactive-rebase)
       ;(define-key map (kbd "R") 'magit-rebase-step)
       ;(define-key map (kbd "e") 'magit-ediff)
@@ -82,7 +93,7 @@
       (define-key map (kbd "[") 'magit-diff-smaller-hunks)
       (define-key map (kbd "]") 'magit-diff-larger-hunks)
       (define-key map (kbd "}") 'magit-diff-default-hunks)
-      ;(define-key map ",vl" 'switch-to-magit-process-buffer ) ; does not work because , isn't a prefix key
+      
       ;(define-key map (kbd "h") 'magit-key-mode-popup-diff-options)
       ;(define-key map (kbd "H") 'magit-diff-toggle-refine-hunk)
       ;(define-key map (kbd "S") 'magit-stage-all)
