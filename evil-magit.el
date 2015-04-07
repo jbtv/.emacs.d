@@ -131,7 +131,8 @@
       map)
     "Keymap for `magit-commit-mode'.")
 
-  (define-key git-commit-mode-map (kbd "<C-return>") 'git-commit-commit)
+  (eval-after-load "git-commit-mode"
+   '(define-key git-commit-mode-map (kbd "<C-return>") 'git-commit-commit))
   
   (message "defvar magit-section-jump-mode-map")
   (defvar magit-section-jump-map
