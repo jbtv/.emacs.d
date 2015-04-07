@@ -120,6 +120,18 @@
         ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
         ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "ral" 'cljr-add-missing-libspec)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rai" 'cljr-add-import)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rar" 'cljr-add-require)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rci" 'cljr-cycle-if)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rdk" 'cljr-destructure-keys)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "ril" 'cljr-introduce-let)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rel" 'cljr-expand-let)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "ref" 'cljr-extract-function)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rfu" 'cljr-find-usages)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rml" 'cljr-move-to-let)
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rpf" 'cljr-promote-function )
+        ;(evil-leader/set-key-for-mode 'clojure-mode "rrs" 'cljr-rename-symbol)
         (evil-leader/set-key-for-mode 'clojure-mode "ee" 'cider-eval-last-sexp)
         (evil-leader/set-key-for-mode 'clojure-mode "eb" 'cider-eval-buffer)
         (evil-leader/set-key-for-mode 'clojure-mode "er" 'cider-eval-region)
@@ -210,28 +222,17 @@
 ;    (yas-global-mode 1)
 ;    (use-package clojure-snippets)))
 
-;fixme change to use-package
-(require 'clj-refactor)
-(add-hook 'clojure-mode-hook (lambda ()
-                               (clj-refactor-mode 1)
-                               (setq cljr-magic-requires t) ; turned this off because it is _crazy_ slow even with an empty file!
-                               (evil-leader/set-key "ral" 'cljr-add-missing-libspec)
-                               (evil-leader/set-key "rai" 'cljr-add-import)
-                               (evil-leader/set-key "rar" 'cljr-add-require)
-                               (evil-leader/set-key "rci" 'cljr-cycle-if)
-                               (evil-leader/set-key "rdk" 'cljr-destructure-keys)
-                               (evil-leader/set-key "ril" 'cljr-introduce-let)
-                               (evil-leader/set-key "rel" 'cljr-expand-let)
-                               (evil-leader/set-key "ref" 'cljr-extract-function)
-                               (evil-leader/set-key "rfu" 'cljr-find-usages)
-                               (evil-leader/set-key "rml" 'cljr-move-to-let)
-                               (evil-leader/set-key "rpf" 'cljr-promote-function )
-                               (evil-leader/set-key "rrs" 'cljr-rename-symbol)
-                               ;(evil-leader/set-key "" 'cljr-)
-                               ;(evil-leader/set-key "" 'cljr-)
-                               ;(evil-leader/set-key "" 'cljr-)
-                               ))
-
+;(use-package clj-refactor
+;  :init
+;  (progn
+;    (add-hook 'clojure-mode-hook (lambda ()
+;                                   (clj-refactor-mode 1)
+;                                   (setq cljr-magic-requires t) ; turned this off because it is _crazy_ slow even with an empty file!
+;                                   ;(evil-leader/set-leader ",")
+;					;(evil-leader/set-key "" 'cljr-)
+;                                   ;(evil-leader/set-key "" 'cljr-)
+;                                   ;(evil-leader/set-key "" 'cljr-)
+;                                   ))))
 
 (use-package clojure-mode
   :mode ("\\.edn$" . clojure-mode)
