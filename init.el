@@ -143,7 +143,7 @@
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
         (evil-leader/set-key "b." 'previous-buffer)
         (evil-leader/set-key "b," 'next-buffer)
-        (evil-leader/set-key "bl" 'list-buffers)
+        (evil-leader/set-key "bl" 'buffer-menu)
         (evil-leader/set-key "bd" 'delete-window)
         (evil-leader/set-key "bo" 'delete-other-windows)
         (evil-leader/set-key "bk" 'kill-buffer-and-window)
