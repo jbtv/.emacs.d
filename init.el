@@ -144,6 +144,7 @@
         (evil-leader/set-key "b," 'next-buffer)
         (evil-leader/set-key "bl" 'list-buffers)
         (evil-leader/set-key "bd" 'delete-window)
+        (evil-leader/set-key "bo" 'delete-other-windows)
         (evil-leader/set-key "bk" 'kill-buffer-and-window)
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
