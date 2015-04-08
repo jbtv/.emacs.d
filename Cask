@@ -9,17 +9,29 @@
 (depends-on "evil-smartparens")
 (depends-on "ace-jump-mode")
 (depends-on "aggressive-indent")
+
+; To be investigated
 ;(depends-on "helm-swoop") ; find the right occurrence of search term with many occurrences
 ;(depends-on "minimap") ; sublime-style ... maybe give it a shot
 ;(depends-on "anzu") ; display match-count and match-index for searches
 ;(depends-on "ace-link") ; ace-jump for following links in eww, help, org-mode
 ;(depends-on "google-this") ; google regions, symbols, etc
+
+
+; clojure
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")
+
+;ruby 
 (depends-on "rvm")
 (depends-on "rinari")
 (depends-on "robe")
+
+;python
+(depends-on "jedi")
+
+; misc
 (depends-on "company")
 (depends-on "solarized-theme")
 (depends-on "relative-line-numbers")
