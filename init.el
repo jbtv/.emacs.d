@@ -357,6 +357,18 @@
   (progn
     ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; python ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package jedi
+  :config
+  (progn
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
+    (setq jedi:complete-on-dot t)))
+
+
 ;;;;;;;;;;;;;;;;;;;
 ; custom set crap ;
 ;;;;;;;;;;;;;;;;;;;
