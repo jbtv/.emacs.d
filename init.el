@@ -110,6 +110,7 @@
   :init
   (progn
     (evil-mode 1)
+    (global-set-key (kbd "<f5>" ) 'evil-mode) ; handy until I fix all the major modes which do not have evil-motion
     (use-package evil-leader
       :init (global-evil-leader-mode)
       :config
