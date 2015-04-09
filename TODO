@@ -3,6 +3,7 @@ bind:
 magit-discard-item
 magit-stage-all && magit-commit-mode
 buffer-menu (aot buffer-menu-other-window) ... what is ,bl bound to? I want buffer-menu
+think of a good one for 'shell
 
 get rid of whatever is bound to "n" in magit modes ... I do indeed want next-search or whatever
 get rid of the 1234 bindings in magit ... clobbers evil-motion
@@ -14,6 +15,7 @@ new-frame deprecated -> make-frame
 https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc
 
 PYTHON TODO
+FUCK it is annoying that motion keys are not working in elpy-config Custom-mode buffer
 https://github.com/tkf/emacs-jedi-direx
 https://github.com/m2ym/direx-el
 How to automate M-x run-python? should it run one per buffer? probably not
