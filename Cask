@@ -1,5 +1,7 @@
 (source gnu)
 (source melpa)
+(source "elpy" "http://jorgenschaefer.github.io/packages/")
+
 
 (depends-on "use-package")
 (depends-on "cider")
@@ -29,6 +31,7 @@
 (depends-on "robe")
 
 ;python
+(depends-on "elpy")
 (depends-on "jedi")
 
 ; misc
