@@ -50,6 +50,8 @@
 ; FIXME ... this is very specific to me and I should find another way of doing this
 (load "/home/blake/.sensitive.el")
 
+(load "~/.emacs.d/mysql.el")
+
 (use-package inf-mongo
   :config
   (progn
