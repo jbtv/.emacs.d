@@ -24,6 +24,10 @@ http://elpy.readthedocs.org/en/latest/index.html
 bigger things to try
 https://github.com/syohex/emacs-git-gutter
 
+SHELLS/INTERPRETERS
+http://www.emacswiki.org/emacs/SqlCompletion
+
+
 NON-CODE
 http://www.gnu.org/software/emacs/manual/html_node/emacs/Text-Based-Tables.html
 I might like to have completions from an english dictionary in some mode for editing docs, and perhaps it is possible to enable it in comments? ditto spellcheck and autofix typos... maybe
