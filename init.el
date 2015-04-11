@@ -216,7 +216,37 @@
     (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
     (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
+    (require 'hydra)
+    (defhydra hydra-edit-sexps ()
+ "
+^Nav^             ^Unmark^           ^Actions^          ^Search
+^^^^^^^^-----------------------------------------------------------------
+_l_: forward       
+_h_: backward     
+_j_: down         
+_J_: back-down    
+_k_: back-up
+_K_: up
+_w_: next
+_b_: prev
+"
+      ("l" sp-forward-sexp               )
+      ("h" sp-backward-sexp              )
+      ("j" sp-down-sexp                  )
+      ("J" sp-backward-down-sexp         )
+      ("k" sp-backward-up-sexp           )
+      ("K" sp-up-sexp                    )
+      ("w" sp-beginning-of-next-sexp     )
+      ("b" sp-beginning-of-previous-sexp )
+      ;("W" sp-next-sexp                  )
+      ;("B" sp-previous-sexp              )
+      ("(" sp-beginning-of-sexp          )
+      (")" sp-end-of-sexp                )
+      ;("q" sp-end-of-next-sexp           )
+      ;("w" sp-end-of-previous-sexp       )
+      )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "\\") 'hydra-edit-sexps/body))
   :config
   (progn
     (sp-with-modes '(clojure-mode emacs-lisp-mode)

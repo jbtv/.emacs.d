@@ -21,6 +21,7 @@
 
 
 ; clojure
+(depends-on "hydra")
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")
