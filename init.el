@@ -147,7 +147,7 @@
         (evil-leader/set-key "b," 'next-buffer)
         (evil-leader/set-key "bl" 'buffer-menu)
         (evil-leader/set-key "wd" 'delete-window)
-        (evil-leader/set-key "wo" 'delete-other-windows)
+        (evil-leader/set-key "wb" 'delete-other-windows)
         (evil-leader/set-key "bk" 'kill-buffer-and-window)
         (evil-leader/set-key "bd" 'kill-buffer)
         (evil-leader/set-key ",x" 'smex)
@@ -369,7 +369,7 @@
   :config
   (progn
     (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
-    (evil-leader/set-key "wo" 'pyenv-workon)
+    (evil-leader/set-key-for-mode 'python-mode "wo" 'pyenv-workon)
     (add-hook 'python-mode-hook #'(lambda () (elpy-enable))))) ; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
 
 ;(use-package jedi
