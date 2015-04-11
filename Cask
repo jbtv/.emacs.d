@@ -25,6 +25,9 @@
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")
 
+; haskell
+(depends-on "haskell-mode")
+
 ;ruby 
 (depends-on "rvm")
 (depends-on "rinari")

@@ -16,6 +16,8 @@
 ; for debugging keybindings
 (defun say-poo () (interactive) (message "Poo!"))
 
+(use-package haskell-mode)
+
 (use-package magit
   :init
   (progn
