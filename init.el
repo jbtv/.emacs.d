@@ -1,11 +1,10 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
-
-;;;;;;;;;;;;;;;;;;;;;;
-; making it vim-like ;
-;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'use-package)
+
+; fuck tabs
+(setq-default indent-tabs-mode nil)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit ... make it sensible for a vim user ... this was not straightfoward
@@ -26,7 +25,6 @@
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gd" 'magit-diff-unstaged)
     
-    ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,6 +106,9 @@
     (evil-leader/set-key "pa" 'projectile-ag)
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
+;;;;;;;;;;;;;;;;;;;;;;
+; making it vim-like ;
+;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package evil
   :demand t
