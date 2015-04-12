@@ -58,8 +58,8 @@
   (progn
     (require 'git-gutter)
     (global-git-gutter-mode +1)
-    (global-define-key (kbd "M-n") 'git-gutter:next-hunk)
-    (global-define-key (kbd "M-p") 'git-gutter:previous-hunk)
+    (global-set-key (kbd "M-n") 'git-gutter:next-hunk)
+    (global-set-key (kbd "M-p") 'git-gutter:previous-hunk)
     ;(global-define-key (kbd "") 'git-gutter:do-stage-hunk)
     ))
 
