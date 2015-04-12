@@ -41,8 +41,11 @@ similar to whatever was bad about my first attempt at magit+evil
 *Completions* buffer is fucked ... no motion keys .. major mode is completion
 
 MAGIT still needs work
-my magit bindings like ,a seem to be in the wrong keymap
-they need to apply only to magit-mode buffers
+!!!
+ FIX THIS
+  my magit bindings like ,a seem to be in the wrong keymap
+  they need to apply only to magit-mode buffers
+  I want ,a for align-regexp
 
 
 NEARLY POINTLESS FLUFF
