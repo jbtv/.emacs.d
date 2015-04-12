@@ -242,73 +242,7 @@
     (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
     (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
-    (require 'hydra)
-    (defhydra hydra-edit-sexps ()
- "
-^Nav^             ^Unmark^           ^Actions^          ^Search
-^^^^^^^^-----------------------------------------------------------------
-_l_: forward       
-_h_: backward     
-_j_: down         
-_J_: back-down    
-_k_: back-up
-_K_: up
-_w_: next
-_b_: prev
-"
-      ("l" sp-forward-sexp               )
-      ("h" sp-backward-sexp              )
-      ("j" sp-down-sexp                  )
-      ("J" sp-backward-down-sexp         )
-      ("k" sp-backward-up-sexp           )
-      ("K" sp-up-sexp                    )
-      ;("w" sp-beginning-of-next-sexp     )
-      ("b" sp-beginning-of-previous-sexp )
-      ("w" sp-next-sexp                  )
-      ;("B" sp-previous-sexp              )
-      ("y" sp-beginning-of-sexp          )
-      ("t" sp-end-of-sexp                )
-      ;("q" sp-end-of-next-sexp           )
-      ;("w" sp-end-of-previous-sexp       )
-
-      ; manipulations
-      ("]" sp-forward-slurp-sexp             )
-      ("}" sp-forward-barf-sexp              )
-      ("[" sp-backward-slurp-sexp            )
-      ("{" sp-backward-barf-sexp             )
-      ("d" sp-kill-sexp                      )
-      ("D" sp-backward-kill-sexp             )
-      ("." sp-copy-sexp                      )
-      ("," sp-backward-copy-sexp             )
-      ("1" sp-unwrap-sexp                    "unwrap" )
-      ("2" sp-backward-unwrap-sexp           "back-unwrap" )
-      ("3" sp-transpose-sexp                 "transpose" )
-      ("4" sp-splice-sexp                    "splice" )
-      ("5" sp-splice-sexp-killing-forward    "splice-kill-fwd" )
-      ("6" sp-splice-sexp-killing-backward   "splice-kill-back" )
-      ("7" sp-splice-sexp-killing-around     "splice-kill-around" )
-      ("8" sp-convolute-sexp                 "convolute" )
-      ("9" sp-absorb-sexp                    "absorb" )
-      ("0" sp-emit-sexp                      "emit" )
-      ;("" sp-extract-before-sexp            )
-      ;("" sp-extract-after-sexp             )
-      ;("" sp-split-sexp                     )
-      ;("" sp-join-sexp                      )
-      ;("" sp-rewrap-sexp                    )
-      ;("" sp-swap-enclosing-sexp            )
-      ;("" sp-add-to-next-sexp               )
-      ;("" sp-add-to-previous-sexp           )
-      ;("" sp-select-next-thing              )
-      ;("" sp-select-previous-thing          )
-      ;("" sp-select-next-thing-exchange     )
-      ;("" sp-select-previous-thing-exchange )
-
-
-
-      
-      )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "\\") 'hydra-edit-sexps/body))
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
   :config
   (progn
     (sp-with-modes '(clojure-mode emacs-lisp-mode)
