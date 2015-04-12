@@ -20,8 +20,10 @@
 ;(depends-on "google-this") ; google regions, symbols, etc
 
 
-; clojure
-(depends-on "hydra")
+; clojure / emacs lisp
+;(depends-on "hydra")
+(depends-on "eval-sexp-fu")
+(depends-on "cider-eval-sexp-fu")
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")

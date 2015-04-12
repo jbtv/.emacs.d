@@ -236,13 +236,67 @@
 ; clojure ;
 ;;;;;;;;;;;
 
+(use-package cider-eval-sexp-fu
+  :config
+  (progn
+    (defun init-sexp-fu ()
+      (turn-on-eval-sexp-fu-flash-mode))
+    (add-hook 'clojure-mode-hook #'init-sexp-fu)
+    (add-hook 'emacs-lisp-mode-hook #'init-sexp-fu)
+    ))
+
 (use-package evil-smartparens
   :init
   (progn
     (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
     (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
+
+    ; navigation
+    ;   jk move among siblings
+    ;   hl move up and down the tree
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-l") 'sp-down-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-h") 'sp-backward-up-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-j") 'sp-next-sexp )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-k") '(lambda () (interactive) ( sp-next-sexp -1 ) ))
+
+    ; barf/slurp
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-]") 'sp-forward-slurp-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-}") 'sp-forward-barf-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-[") 'sp-backward-slurp-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-{") 'sp-backward-barf-sexp)
+
+
+    ; killing/copying
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-L") 'sp-kill-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-H") 'sp-backward-kill-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-l") 'sp-copy-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-h") 'sp-backward-copy-sexp)
+
+    ; eval clojure
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-SPC") 'cider-pprint-eval-defun-at-point      )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\") 'cider-eval-defun-at-point              )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f") 'cider-eval-last-sexp-and-replace        )
+
+    ; eval el
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC") 'eval-sexp-fu-eval-sexp-inner-list     )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\") 'eval-sexp-fu-eval-sexp-inner-sexp      )
+    
+
+    ; weird shit
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-a") 'sp-unwrap-sexp                  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-s") 'sp-backward-unwrap-sexp         )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-d") 'sp-transpose-sexp               )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-f") 'sp-splice-sexp                  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-g") 'sp-splice-sexp-killing-forward  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-h") 'sp-splice-sexp-killing-backward )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-k") 'sp-splice-sexp-killing-around   )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-l") 'sp-convolute-sexp               )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-;") 'sp-absorb-sexp                  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-SPC") 'sp-emit-sexp                    )
+    
+    )
   :config
   (progn
     (sp-with-modes '(clojure-mode emacs-lisp-mode)
