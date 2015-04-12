@@ -382,6 +382,7 @@ _b_: prev
       (cider-interactive-eval "(reloaded.repl/reset)"))
 
     (evil-leader/set-key "cd" 'cider-doc)
+    (evil-leader/set-key "cj" 'cider-jump-to-var)
     (evil-leader/set-key "cc" 'cider-connect)
     (evil-leader/set-key "ct" 'cider-test-run-tests)
     (evil-leader/set-key "cr" 'toggle-nrepl-buffer)
