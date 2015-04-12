@@ -1,18 +1,9 @@
-
-bind:
-
-bind something to 'magit-blame-mode and something to 'magit-blame-locate-commit
-
-
-new-frame deprecated -> make-frame
-
-https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc
+https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc ... but doesn't have an elpa package?
 
 PYTHON TODO
-FUCK it is annoying that motion keys are not working in elpy-config Custom-mode buffer
-https://github.com/tkf/emacs-jedi-direx
+https://github.com/tkf/emacs-jedi-direx <-- no elpa
 https://github.com/m2ym/direx-el
-How to automate M-x run-python? should it run one per buffer? probably not
+How to automate M-x run-python? should it run one per buffer? probably not <-- elpy solves this, read about it
 http://elpy.readthedocs.org/en/latest/index.html
 
 bigger things to try
