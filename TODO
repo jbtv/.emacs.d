@@ -1,6 +1,5 @@
 
 bind:
-magit-discard-item
 magit-stage-all && magit-commit-mode
 buffer-menu (aot buffer-menu-other-window) ... what is ,bl bound to? I want buffer-menu
 think of a good one for 'shell

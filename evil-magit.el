@@ -52,6 +52,7 @@
       ;(cond (magit-rigid-key-bindings
 
       (define-key map (kbd ",,c") 'magit-commit)
+      (define-key map (kbd ",,ac") 'magit-commit-amend)
       ;       (define-key map (kbd "m") 'magit-merge)
       ;       (define-key map (kbd "b") 'magit-checkout)
       ;       (define-key map (kbd "M") 'magit-branch-manager)
@@ -156,6 +157,7 @@
       (define-key map (kbd "u") 'magit-unstage-item)
       (define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
       (define-key map (kbd "I") 'magit-ignore-item-locally)
+      (define-key map (kbd "x") 'magit-discard-item)
 
       ; I _think_ this will be a good tradeoff
       ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
@@ -163,7 +165,6 @@
       
       ;(define-key map (kbd ".") 'magit-mark-item)
       ;(define-key map (kbd "=") 'magit-diff-with-mark)
-      ;(define-key map (kbd "k") 'magit-discard-item)
       ;(define-key map (kbd "C") 'magit-commit-add-log)
       map)
     "Keymap for `magit-status-mode'.")

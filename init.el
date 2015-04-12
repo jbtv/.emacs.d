@@ -6,17 +6,17 @@
 (setq-default indent-tabs-mode nil)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Magit ... make it sensible for a vim user ... this was not straightfoward
-; the strategy employed is to nuke magit-mode's keymap and set evil-motion-state-map
-; as its parent keymap, and then to hook each magit-*-mode, nuke its keymap,
-; and define bindings to my liking (and I'm discovering and fixing inadequacies as I go)
 
 ; for debugging keybindings
 (defun say-poo () (interactive) (message "Poo!"))
 
 (use-package haskell-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Magit ... make it sensible for a vim user ... this was not straightfoward
+; the strategy employed is to nuke magit-mode's keymap and set evil-motion-state-map
+; as its parent keymap, and then to hook each magit-*-mode, nuke its keymap,
+; and define bindings to my liking (and I'm discovering and fixing inadequacies as I go)
 (use-package magit
   :init
   (progn
@@ -27,6 +27,8 @@
     
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
+    (defun magit-quick-commit () (interactive) (magit-stage-all) (magit-commit))
+    (evil-leader/set-key "g,c" 'magit-quick-commit)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
