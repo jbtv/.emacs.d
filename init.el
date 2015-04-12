@@ -146,6 +146,7 @@
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
         (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
+        (evil-leader/set-key-for-mode 'sql-mode "er" 'sql-send-region)
         (evil-leader/set-key "b." 'previous-buffer)
         (evil-leader/set-key "b," 'next-buffer)
         (evil-leader/set-key "bl" 'buffer-menu)
