@@ -27,8 +27,14 @@
     
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
+    (evil-leader/set-key "ga" 'magit-blame-mode)
+    
+
+    ; for tiny quick commits, skip some fluff:
     (defun magit-quick-commit () (interactive) (magit-stage-all) (magit-commit))
     (evil-leader/set-key "g,c" 'magit-quick-commit)
+
+    
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
