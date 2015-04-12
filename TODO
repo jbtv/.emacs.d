@@ -6,9 +6,6 @@ https://github.com/m2ym/direx-el
 How to automate M-x run-python? should it run one per buffer? probably not <-- elpy solves this, read about it
 http://elpy.readthedocs.org/en/latest/index.html
 
-bigger things to try
-https://github.com/syohex/emacs-git-gutter
-
 --> better lisp editing <--
 figure out what I want from my smartparens bindings
 http://www.emacswiki.org/emacs/EvalSexpFu
