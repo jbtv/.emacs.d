@@ -50,6 +50,19 @@
   (progn
     (set-evil-magit-bindings)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package git-gutter
+  :demand t
+  :ensure t
+  :init
+  (progn
+    (require 'git-gutter)
+    (global-git-gutter-mode +1)
+    (global-define-key (kbd "M-n") 'git-gutter:next-hunk)
+    (global-define-key (kbd "M-p") 'git-gutter:previous-hunk)
+    ;(global-define-key (kbd "") 'git-gutter:do-stage-hunk)
+    ))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -211,7 +224,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(global-relative-line-numbers-mode) ; unfortunately breaks autocomplete
+; I think this may have been mostly obsoleted for me by things like ace-jump
+; it doesn't play nicely with git-gutter and might break autocomplete?
+;(global-relative-line-numbers-mode)
 
 (let ((font "Menlo:pixelsize=24"))
   (set-face-attribute 'default nil :font font)
