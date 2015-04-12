@@ -156,6 +156,7 @@
         (evil-leader/set-key "wb" 'delete-other-windows)
         (evil-leader/set-key "bk" 'kill-buffer-and-window)
         (evil-leader/set-key "bd" 'kill-buffer)
+        (evil-leader/set-key ",s" 'shell)
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
         (evil-leader/set-key ",w" 'make-frame)

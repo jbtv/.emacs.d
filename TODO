@@ -1,8 +1,5 @@
 
 bind:
-magit-stage-all && magit-commit-mode
-buffer-menu (aot buffer-menu-other-window) ... what is ,bl bound to? I want buffer-menu
-think of a good one for 'shell
 
 get rid of whatever is bound to "n" in magit modes ... I do indeed want next-search or whatever
 get rid of the 1234 bindings in magit ... clobbers evil-motion
