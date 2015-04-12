@@ -147,6 +147,8 @@
         ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
         ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+        ; TODO revive these and use "s-, r" bindings
         ;(evil-leader/set-key-for-mode 'clojure-mode "ral" 'cljr-add-missing-libspec)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rai" 'cljr-add-import)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rar" 'cljr-add-require)
@@ -159,14 +161,6 @@
         ;(evil-leader/set-key-for-mode 'clojure-mode "rml" 'cljr-move-to-let)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rpf" 'cljr-promote-function )
         ;(evil-leader/set-key-for-mode 'clojure-mode "rrs" 'cljr-rename-symbol)
-        (evil-leader/set-key-for-mode 'clojure-mode "ee" 'cider-eval-last-sexp)
-        (evil-leader/set-key-for-mode 'clojure-mode "eb" 'cider-eval-buffer)
-        (evil-leader/set-key-for-mode 'clojure-mode "er" 'cider-eval-region)
-        (evil-leader/set-key-for-mode 'clojure-mode "ef" 'cider-eval-defun-at-point)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ee" 'eval-last-sexp)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
         (evil-leader/set-key-for-mode 'sql-mode "er" 'sql-send-region)
         (evil-leader/set-key "b." 'previous-buffer)
         (evil-leader/set-key "b," 'next-buffer)
@@ -269,32 +263,39 @@
 
 
     ; killing/copying
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-L") 'sp-kill-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-H") 'sp-backward-kill-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-l") 'sp-copy-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-h") 'sp-backward-copy-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-L"     ) 'sp-kill-sexp          )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-H"     ) 'sp-backward-kill-sexp )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-l" ) 'sp-copy-sexp          )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-h" ) 'sp-backward-copy-sexp )
 
     ; eval clojure
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-SPC") 'cider-pprint-eval-defun-at-point      )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\") 'cider-eval-defun-at-point              )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f") 'cider-eval-last-sexp-and-replace        )
-
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-SPC" ) 'cider-pprint-eval-defun-at-point )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\"  ) 'cider-eval-defun-at-point        )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f"   ) 'cider-eval-last-sexp-and-replace )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"   ) 'cider-eval-buffer                )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-r"   ) 'cider-eval-region                )
+    
     ; eval el
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC") 'eval-sexp-fu-eval-sexp-inner-list     )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\") 'eval-sexp-fu-eval-sexp-inner-sexp      )
+    ;(evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC" ) ') ; no equivalent of the clj one
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\" ) 'eval-defun                        )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-i"  ) 'eval-sexp-fu-eval-sexp-inner-sexp )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-l"  ) 'eval-sexp-fu-eval-sexp-inner-list )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-r"     ) 'eval-region                       )
+;eval-sexp-fu-eval-sexp-inner-list 
     
 
     ; weird shit
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-a") 'sp-unwrap-sexp                  )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-s") 'sp-backward-unwrap-sexp         )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-d") 'sp-transpose-sexp               )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-f") 'sp-splice-sexp                  )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-g") 'sp-splice-sexp-killing-forward  )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-h") 'sp-splice-sexp-killing-backward )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-k") 'sp-splice-sexp-killing-around   )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-l") 'sp-convolute-sexp               )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-;") 'sp-absorb-sexp                  )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-SPC") 'sp-emit-sexp                    )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-u") 'sp-unwrap-sexp                  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-s") 'sp-transpose-sexp               )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-d") 'sp-backward-unwrap-sexp         )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-f") 'sp-splice-sexp                  ) ; just like unwrap?
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-g") 'sp-splice-sexp-killing-forward  )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-h") 'sp-splice-sexp-killing-backward )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-k") 'sp-splice-sexp-killing-around   )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-l") 'sp-convolute-sexp               )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-;") 'sp-absorb-sexp                  )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-SPC") 'sp-emit-sexp                    )
     
     )
   :config
