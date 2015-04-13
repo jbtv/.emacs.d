@@ -41,6 +41,7 @@
 (depends-on "jedi")
 
 ; misc
+(depends-on "instant-markdown" :git "git@github.com:blak3mill3r/instant-markdown.git" :ref "master")
 (depends-on "company")
 (depends-on "solarized-theme")
 (depends-on "relative-line-numbers")

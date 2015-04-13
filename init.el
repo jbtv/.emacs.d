@@ -127,6 +127,13 @@
     (evil-leader/set-key "pa" 'projectile-ag)
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; my own first emacs plugin
+(use-package instant-markdown
+  :config
+  (progn
+    (evil-leader/set-key ",mp" 'instant-md-start)))
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ; making it vim-like ;
 ;;;;;;;;;;;;;;;;;;;;;;
