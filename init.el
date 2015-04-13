@@ -277,11 +277,11 @@
     
     ; eval el
     ;(evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC" ) ') ; no equivalent of the clj one
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\" ) 'eval-defun                        )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\" ) 'eval-sexp-fu-eval-sexp-inner-list )
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-i"  ) 'eval-sexp-fu-eval-sexp-inner-sexp )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-l"  ) 'eval-sexp-fu-eval-sexp-inner-list )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-r"     ) 'eval-region                       )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-d"  ) 'eval-defun)
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-r"     ) 'eval-region                       )
 ;eval-sexp-fu-eval-sexp-inner-list 
     
 
