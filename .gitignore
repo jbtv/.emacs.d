@@ -4,3 +4,5 @@ nrepl-history
 ac-comphist.dat
 elpa/
 .cask
+/smex-items
+/.python-environments/
