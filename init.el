@@ -23,6 +23,7 @@
     ; bindings to enter various magit modes
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gd" 'magit-diff-unstaged)
+    (evil-leader/set-key "qc" (lambda () (interactive) (call-interactively 'magit-stage-all) (call-interactively 'magit-commit)))
     
     ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
