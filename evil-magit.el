@@ -154,6 +154,7 @@
       
       (define-key map (kbd "s") 'magit-stage-item)
       (define-key map (kbd "u") 'magit-unstage-item)
+      (define-key map (kbd "d") 'magit-discard-item)
       (define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
       (define-key map (kbd "I") 'magit-ignore-item-locally)
 
@@ -161,9 +162,8 @@
       ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix
       (define-key map (kbd "g") 'magit-section-jump-map)
       
-      ;(define-key map (kbd ".") 'magit-mark-item)
-      ;(define-key map (kbd "=") 'magit-diff-with-mark)
-      ;(define-key map (kbd "k") 'magit-discard-item)
+      (define-key map (kbd ".") 'magit-mark-item)
+      (define-key map (kbd "=") 'magit-diff-with-mark)
       ;(define-key map (kbd "C") 'magit-commit-add-log)
       map)
     "Keymap for `magit-status-mode'.")
