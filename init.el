@@ -1,11 +1,11 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
+(require 'use-package)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; making it vim-like ;
 ;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit ... make it sensible for a vim user ... this was not straightfoward
@@ -28,6 +28,9 @@
     ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
+
+    (evil-leader/set-key "gb" 'magit-blame-mode)
+    (evil-leader/set-key-for-mode 'magit-blame-mode "gb" 'magit-blame-locate-commit)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
@@ -50,7 +53,6 @@
 
 ; FIXME ... this is very specific to me and I should find another way of doing this
 (load "/home/blake/.sensitive.el")
-
 (load "~/.emacs.d/mysql.el")
 
 (use-package inf-mongo
