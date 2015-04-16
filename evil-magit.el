@@ -1,6 +1,5 @@
 
 (defun set-evil-magit-bindings ()
-  (message "Set evil magic")
 					; the main differences of this magit-mode-map AOT the one from magit.el are:
 					; instead of starting with a (make-keymap) we start by copying the evil-motion-state-map
 					; also define "," as evil-leader--default-map to allow leader commands to work in magit modes
@@ -11,7 +10,6 @@
 					; if I find one which definitely clobbers a binding in a way that I think will confuse vim lovers, I change it to keep it at least fairly free of awful surprises
 					; OTHERWISE I leave the binding alone to keep the differences minimal
 					; this process is ongoing, at this point lots of important magit commands are still unavailable
-  (message "defvar magit-mode-map")
   (defvar magit-mode-map
     (let ((map (copy-keymap evil-motion-state-map)))
       (define-key map "," evil-leader--default-map)
@@ -131,7 +129,6 @@
       map)
     "Keymap for `magit-blame-mode'.")
 
-  (message "defvar magit-commit-mode-map")
   (defvar magit-commit-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -146,7 +143,6 @@
   (eval-after-load "git-commit-mode"
    '(define-key git-commit-mode-map (kbd "<C-return>") 'git-commit-commit))
   
-  (message "defvar magit-section-jump-mode-map")
   (defvar magit-section-jump-map
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "z") 'magit-jump-to-stashes)
@@ -159,7 +155,6 @@
       map)
     "Submap for jumping to sections in `magit-status-mode'.")
 
-  (message "defvar magit-status-mode-map")
   (defvar magit-status-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -181,7 +176,6 @@
       map)
     "Keymap for `magit-status-mode'.")
 
-  (message "defvar magit-log-mode-map")
   (defvar magit-log-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -192,21 +186,18 @@
       map)
     "Keymap for `magit-log-mode'.")
   
-  (message "defvar magit-cherry-mode-map")
   (defvar magit-cherry-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
       map)
     "Keymap for `magit-cherry-mode'.")
   
-  (message "defvar magit-reflog-mode-map")
   (defvar magit-reflog-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-log-mode-map)
       map)
     "Keymap for `magit-reflog-mode'.")
   
-  (message "defvar magit-diff-mode-map")
   (defvar magit-diff-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -218,7 +209,6 @@
       map)
     "Keymap for `magit-diff-mode'.")
   
-  (message "defvar magit-wazzup-mode-map")
   (defvar magit-wazzup-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -228,7 +218,6 @@
       map)
     "Keymap for `magit-wazzup-mode'.")
   
-  (message "defvar magit-branch-manager-mode-map")
   (defvar magit-branch-manager-mode-map ; INTERESTING play with this
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
@@ -240,7 +229,6 @@
       map)
     "Keymap for `magit-branch-manager-mode'.")
   
-  (message "defvar magit-process-mode-map")
   (defvar magit-process-mode-map
     (let ((map (make-sparse-keymap)))
       (set-keymap-parent map magit-mode-map)
