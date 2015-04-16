@@ -1,24 +1,20 @@
-
 bind:
 
-get rid of whatever is bound to "n" in magit modes ... I do indeed want next-search or whatever
-get rid of the 1234 bindings in magit ... clobbers evil-motion
-bind something to 'magit-blame-mode and something to 'magit-blame-locate-commit
-
-
-new-frame deprecated -> make-frame
-
-https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc
+https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc ... but doesn't have an elpa package?
 
 PYTHON TODO
-FUCK it is annoying that motion keys are not working in elpy-config Custom-mode buffer
-https://github.com/tkf/emacs-jedi-direx
+https://github.com/tkf/emacs-jedi-direx <-- no elpa
 https://github.com/m2ym/direx-el
-How to automate M-x run-python? should it run one per buffer? probably not
+How to automate M-x run-python? should it run one per buffer? probably not <-- elpy solves this, read about it
 http://elpy.readthedocs.org/en/latest/index.html
 
-bigger things to try
-https://github.com/syohex/emacs-git-gutter
+--> better lisp editing <--
+figure out what I want from my smartparens bindings
+http://www.emacswiki.org/emacs/EvalSexpFu
+
+egads, this looks maybe better?
+http://oremacs.com/lispy
+
 
 SHELLS/INTERPRETERS
 http://www.emacswiki.org/emacs/SqlCompletion
@@ -51,8 +47,11 @@ similar to whatever was bad about my first attempt at magit+evil
 *Completions* buffer is fucked ... no motion keys .. major mode is completion
 
 MAGIT still needs work
-my magit bindings like ,a seem to be in the wrong keymap
-they need to apply only to magit-mode buffers
+!!!
+ FIX THIS
+  my magit bindings like ,a seem to be in the wrong keymap
+  they need to apply only to magit-mode buffers
+  I want ,a for align-regexp
 
 
 NEARLY POINTLESS FLUFF

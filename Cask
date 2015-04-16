@@ -20,10 +20,16 @@
 ;(depends-on "google-this") ; google regions, symbols, etc
 
 
-; clojure
+; clojure / emacs lisp
+;(depends-on "hydra")
+(depends-on "eval-sexp-fu")
+(depends-on "cider-eval-sexp-fu")
 (depends-on "clojure-mode")
 (depends-on "clj-refactor")
 (depends-on "clojure-snippets")
+
+; haskell
+(depends-on "haskell-mode")
 
 ;ruby 
 (depends-on "rvm")
@@ -35,6 +41,7 @@
 (depends-on "jedi")
 
 ; misc
+(depends-on "instant-markdown" :git "git@github.com:blak3mill3r/instant-markdown.git" :ref "master")
 (depends-on "company")
 (depends-on "solarized-theme")
 (depends-on "relative-line-numbers")
@@ -54,6 +61,7 @@
 (depends-on "htmlize")
 (depends-on "idle-highlight-mode")
 (depends-on "magit")
+(depends-on "git-gutter")
 (depends-on "multiple-cursors")
 (depends-on "nyan-mode")
 (depends-on "pallet")

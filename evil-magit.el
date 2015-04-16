@@ -15,17 +15,17 @@
   (defvar magit-mode-map
     (let ((map (copy-keymap evil-motion-state-map)))
       (define-key map "," evil-leader--default-map)
-      (define-key map (kbd "n") 'magit-goto-next-section)
-      (define-key map (kbd "p") 'magit-goto-previous-section)
+      (define-key map (kbd "C-n") 'magit-goto-next-section)
+      (define-key map (kbd "C-p") 'magit-goto-previous-section)
       (define-key map (kbd "^") 'magit-goto-parent-section)
-      (define-key map (kbd "C-n") 'magit-goto-next-sibling-section)
-      (define-key map (kbd "C-p") 'magit-goto-previous-sibling-section)
+      ;(define-key map (kbd "C-n") 'magit-goto-next-sibling-section)
+      ;(define-key map (kbd "C-p") 'magit-goto-previous-sibling-section)
       (define-key map (kbd "TAB") 'magit-toggle-section)
       (define-key map (kbd "<backtab>") 'magit-expand-collapse-section)
-      (define-key map (kbd "1") 'magit-show-level-1)
-      (define-key map (kbd "2") 'magit-show-level-2)
-      (define-key map (kbd "3") 'magit-show-level-3)
-      (define-key map (kbd "4") 'magit-show-level-4)
+      ;(define-key map (kbd "1") 'magit-show-level-1)
+      ;(define-key map (kbd "2") 'magit-show-level-2)
+      ;(define-key map (kbd "3") 'magit-show-level-3)
+      ;(define-key map (kbd "4") 'magit-show-level-4)
       ;(define-key map (kbd "M-1") 'magit-show-level-1-all)
       ;(define-key map (kbd "M-2") 'magit-show-level-2-all)
       ;(define-key map (kbd "M-3") 'magit-show-level-3-all)
@@ -52,6 +52,7 @@
       ;(cond (magit-rigid-key-bindings
 
       (define-key map (kbd ",,c") 'magit-commit)
+      (define-key map (kbd ",,ac") 'magit-commit-amend)
       ;       (define-key map (kbd "m") 'magit-merge)
       ;       (define-key map (kbd "b") 'magit-checkout)
       ;       (define-key map (kbd "M") 'magit-branch-manager)
@@ -119,6 +120,17 @@
       map)
     "BLAKE's EVIL Parent keymap for all keymaps of modes derived from `magit-mode'.") 
 
+  (defvar magit-blame-map
+    (let ((map (make-sparse-keymap)))
+      (set-keymap-parent map magit-mode-map)
+      (define-key map (kbd "C-p") 'magit-go-backward) ; experiment...
+      (define-key map (kbd "C-n") 'magit-go-forward)
+      (define-key map (kbd "RET") 'magit-blame-locate-commit)
+      ;(define-key map (kbd "DEL") 'scroll-down)
+      ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
+      map)
+    "Keymap for `magit-blame-mode'.")
+
   (message "defvar magit-commit-mode-map")
   (defvar magit-commit-mode-map
     (let ((map (make-sparse-keymap)))
@@ -157,6 +169,7 @@
       (define-key map (kbd "d") 'magit-discard-item)
       (define-key map (kbd "i") 'magit-ignore-item) ; very interesting ... what it do?
       (define-key map (kbd "I") 'magit-ignore-item-locally)
+      (define-key map (kbd "x") 'magit-discard-item)
 
       ; I _think_ this will be a good tradeoff
       ; clobbers whatever "g" is in evil-motion ... describe-key wont tell me because it's a prefix

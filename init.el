@@ -2,20 +2,20 @@
 (cask-initialize)
 (require 'use-package)
 
+; fuck tabs
+(setq-default indent-tabs-mode nil)
 
-;;;;;;;;;;;;;;;;;;;;;;
-; making it vim-like ;
-;;;;;;;;;;;;;;;;;;;;;;
+
+; for debugging keybindings
+(defun say-poo () (interactive) (message "Poo!"))
+
+(use-package haskell-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit ... make it sensible for a vim user ... this was not straightfoward
 ; the strategy employed is to nuke magit-mode's keymap and set evil-motion-state-map
 ; as its parent keymap, and then to hook each magit-*-mode, nuke its keymap,
 ; and define bindings to my liking (and I'm discovering and fixing inadequacies as I go)
-
-; for debugging keybindings
-(defun say-poo () (interactive) (message "Poo!"))
-
 (use-package magit
   :init
   (progn
@@ -25,12 +25,16 @@
     (evil-leader/set-key "gd" 'magit-diff-unstaged)
     (evil-leader/set-key "qc" (lambda () (interactive) (call-interactively 'magit-stage-all) (call-interactively 'magit-commit)))
     
-    ;(evil-leader/set-key "gcm" 'magit-commit)
     ;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
 
     (evil-leader/set-key "gb" 'magit-blame-mode)
     (evil-leader/set-key-for-mode 'magit-blame-mode "gb" 'magit-blame-locate-commit)
+
+    ; for tiny quick commits, skip some fluff:
+    (defun magit-quick-commit () (interactive) (magit-stage-all) (magit-commit))
+    (evil-leader/set-key "g,c" 'magit-quick-commit)
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
@@ -45,6 +49,19 @@
   :config
   (progn
     (set-evil-magit-bindings)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package git-gutter
+  :demand t
+  :ensure t
+  :init
+  (progn
+    (require 'git-gutter)
+    (global-git-gutter-mode +1)
+    (global-set-key (kbd "M-n") 'git-gutter:next-hunk)
+    (global-set-key (kbd "M-p") 'git-gutter:previous-hunk)
+    ;(global-define-key (kbd "") 'git-gutter:do-stage-hunk)
+    ))
 
 
 
@@ -109,6 +126,16 @@
     (evil-leader/set-key "pa" 'projectile-ag)
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; my own first emacs plugin
+(use-package instant-markdown
+  :config
+  (progn
+    (evil-leader/set-key ",mp" 'instant-md-start)))
+
+;;;;;;;;;;;;;;;;;;;;;;
+; making it vim-like ;
+;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package evil
   :demand t
@@ -126,6 +153,8 @@
         ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
         ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
         ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+        ; TODO revive these and use "s-, r" bindings
         ;(evil-leader/set-key-for-mode 'clojure-mode "ral" 'cljr-add-missing-libspec)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rai" 'cljr-add-import)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rar" 'cljr-add-require)
@@ -138,21 +167,15 @@
         ;(evil-leader/set-key-for-mode 'clojure-mode "rml" 'cljr-move-to-let)
         ;(evil-leader/set-key-for-mode 'clojure-mode "rpf" 'cljr-promote-function )
         ;(evil-leader/set-key-for-mode 'clojure-mode "rrs" 'cljr-rename-symbol)
-        (evil-leader/set-key-for-mode 'clojure-mode "ee" 'cider-eval-last-sexp)
-        (evil-leader/set-key-for-mode 'clojure-mode "eb" 'cider-eval-buffer)
-        (evil-leader/set-key-for-mode 'clojure-mode "er" 'cider-eval-region)
-        (evil-leader/set-key-for-mode 'clojure-mode "ef" 'cider-eval-defun-at-point)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ee" 'eval-last-sexp)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "eb" 'eval-buffer)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "er" 'eval-region)
-        (evil-leader/set-key-for-mode 'emacs-lisp-mode "ef" 'eval-defun)
+        (evil-leader/set-key-for-mode 'sql-mode "er" 'sql-send-region)
         (evil-leader/set-key "b." 'previous-buffer)
         (evil-leader/set-key "b," 'next-buffer)
         (evil-leader/set-key "bl" 'buffer-menu)
         (evil-leader/set-key "wd" 'delete-window)
-        (evil-leader/set-key "wo" 'delete-other-windows)
+        (evil-leader/set-key "wb" 'delete-other-windows)
         (evil-leader/set-key "bk" 'kill-buffer-and-window)
         (evil-leader/set-key "bd" 'kill-buffer)
+        (evil-leader/set-key ",s" 'shell)
         (evil-leader/set-key ",x" 'smex)
         (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
         (evil-leader/set-key ",w" 'make-frame)
@@ -201,7 +224,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(global-relative-line-numbers-mode) ; unfortunately breaks autocomplete
+; I think this may have been mostly obsoleted for me by things like ace-jump
+; it doesn't play nicely with git-gutter and might break autocomplete?
+;(global-relative-line-numbers-mode)
 
 (let ((font "Menlo:pixelsize=24"))
   (set-face-attribute 'default nil :font font)
@@ -211,13 +236,74 @@
 ; clojure ;
 ;;;;;;;;;;;
 
+(use-package cider-eval-sexp-fu
+  :config
+  (progn
+    (defun init-sexp-fu ()
+      (turn-on-eval-sexp-fu-flash-mode))
+    (add-hook 'clojure-mode-hook #'init-sexp-fu)
+    (add-hook 'emacs-lisp-mode-hook #'init-sexp-fu)
+    ))
+
 (use-package evil-smartparens
   :init
   (progn
     (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
     (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode))
+    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
+
+    ; navigation
+    ;   jk move among siblings
+    ;   hl move up and down the tree
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-l") 'sp-down-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-h") 'sp-backward-up-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-j") 'sp-next-sexp )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-k") '(lambda () (interactive) ( sp-next-sexp -1 ) ))
+
+    ; barf/slurp
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-]") 'sp-forward-slurp-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-}") 'sp-forward-barf-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-[") 'sp-backward-slurp-sexp)
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-{") 'sp-backward-barf-sexp)
+
+
+    ; killing/copying
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-L"     ) 'sp-kill-sexp          )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-H"     ) 'sp-backward-kill-sexp )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-l" ) 'sp-copy-sexp          )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-h" ) 'sp-backward-copy-sexp )
+
+    ; eval clojure
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-SPC" ) 'cider-pprint-eval-defun-at-point )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\"  ) 'cider-eval-defun-at-point        )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f"   ) 'cider-eval-last-sexp-and-replace )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"   ) 'cider-eval-buffer                )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-r"   ) 'cider-eval-region                )
+    
+    ; eval el
+    ;(evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC" ) ') ; no equivalent of the clj one
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\" ) 'eval-sexp-fu-eval-sexp-inner-list )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-i"  ) 'eval-sexp-fu-eval-sexp-inner-sexp )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-d"  ) 'eval-defun)
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-r"     ) 'eval-region                       )
+;eval-sexp-fu-eval-sexp-inner-list 
+    
+
+    ; weird shit
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-u") 'sp-unwrap-sexp                  )
+    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-s") 'sp-transpose-sexp               )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-d") 'sp-backward-unwrap-sexp         )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-f") 'sp-splice-sexp                  ) ; just like unwrap?
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-g") 'sp-splice-sexp-killing-forward  )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-h") 'sp-splice-sexp-killing-backward )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-k") 'sp-splice-sexp-killing-around   )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-l") 'sp-convolute-sexp               )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-;") 'sp-absorb-sexp                  )
+    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-SPC") 'sp-emit-sexp                    )
+    
+    )
   :config
   (progn
     (sp-with-modes '(clojure-mode emacs-lisp-mode)
@@ -249,7 +335,7 @@
     (use-package cider
       :init
       (progn
-        (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+        ;(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
         (add-hook 'cider-repl-mode-hook 'subword-mode)
         ;(use-package slamhound)
 	)
@@ -315,6 +401,8 @@
       (cider-interactive-eval "(reloaded.repl/reset)"))
 
     (evil-leader/set-key "cd" 'cider-doc)
+    (evil-leader/set-key "cj" 'cider-jump-to-var)
+    (evil-leader/set-key "ch" 'cider-jump-back)
     (evil-leader/set-key "cc" 'cider-connect)
     (evil-leader/set-key "ct" 'cider-test-run-tests)
     (evil-leader/set-key "cr" 'toggle-nrepl-buffer)
@@ -372,7 +460,7 @@
   :config
   (progn
     (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
-    (evil-leader/set-key "wo" 'pyenv-workon)
+    (evil-leader/set-key-for-mode 'python-mode "wo" 'pyenv-workon)
     (add-hook 'python-mode-hook #'(lambda () (elpy-enable))))) ; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
 
 ;(use-package jedi
