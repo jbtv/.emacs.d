@@ -201,12 +201,41 @@
 ;; autocomplete ;;
 ;;;;;;;;;;;;;;;;;;
 
+(defcustom company-clang-executable
+  (executable-find "clang-3.7")
+  "Location of clang executable."
+  :type 'file)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+;(require 'company-clang)
+(require 'company-c-headers)
+(require 'irony)
+(require 'irony-eldoc)
+
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+
 (use-package company
   :init (global-company-mode)
 ;(add-hook 'cider-repl-mode-hook #'company-mode)
 ;(add-hook 'cider-mode-hook #'company-mode)
   :config
   (progn
+
+    (add-to-list 'company-backends 'company-c-headers)
+    (setq company-backends (delete 'company-semantic company-backends))
+    (define-key c-mode-map  [(tab)] 'company-complete)
+    (define-key c++-mode-map  [(tab)] 'company-complete)
     (eval-after-load 'company
       '(push 'company-robe company-backends))
 
@@ -311,12 +340,29 @@
     (sp-with-modes '(clojure-mode emacs-lisp-mode)
       (sp-local-pair "'" nil :actions nil)))) ; for lisp modes do not treat single-quote as a pairing
 
-; yasnippet (required for certain features of clj-refactor)
-;(use-package yasnippet
+                                        ;(use-package irony-eldoc)
+;(use-package company-irony)
+;(use-package irony-mode
 ;  :init
 ;  (progn
-;    (yas-global-mode 1)
-;    (use-package clojure-snippets)))
+;    (add-hook 'c++-mode-hook 'irony-mode)
+;    (add-hook 'c-mode-hook 'irony-mode)
+;    (add-hook 'objc-mode-hook 'irony-mode)
+;
+;    (defun my-irony-mode-hook ()
+;      (define-key irony-mode-map [remap completion-at-point]
+;        'irony-completion-at-point-async)
+;      (define-key irony-mode-map [remap complete-symbol]
+;        'irony-completion-at-point-async))
+;    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+;    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
+
+; yasnippet (required for certain features of clj-refactor)
+(use-package yasnippet
+  :init
+  (progn
+    (yas-global-mode 1)
+    (use-package clojure-snippets)))
 
 ;(use-package clj-refactor
 ;  :init

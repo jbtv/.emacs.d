@@ -31,6 +31,12 @@
 ; haskell
 (depends-on "haskell-mode")
 
+; C/C++/Objective-C
+(depends-on "irony")
+(depends-on "company-irony")
+(depends-on "company-c-headers")
+(depends-on "irony-eldoc")
+
 ;ruby 
 (depends-on "rvm")
 (depends-on "rinari")
