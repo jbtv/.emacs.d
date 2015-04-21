@@ -281,7 +281,7 @@
     (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\"  ) 'cider-eval-defun-at-point        )
     (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f"   ) 'cider-eval-last-sexp-and-replace )
     (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"   ) 'cider-eval-buffer                )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-r"   ) 'cider-eval-region                )
+    (evil-define-key 'normal clojure-mode-map (kbd "s-r"   ) 'cider-eval-region                )
     
     ; eval el
     ;(evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC" ) ') ; no equivalent of the clj one
