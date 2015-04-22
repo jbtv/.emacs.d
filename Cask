@@ -2,6 +2,7 @@
 (source melpa)
 (source "elpy" "http://jorgenschaefer.github.io/packages/")
 
+(depends-on "ido-vertical-mode")
 
 (depends-on "use-package")
 (depends-on "cider")

@@ -2,6 +2,15 @@
 (cask-initialize)
 (require 'use-package)
 
+(use-package ido-vertical-mode
+  :config
+  (progn
+    (ido-mode 1)
+    (ido-vertical-mode 1)
+    (evil-leader/set-key ",." 'ido-dired)
+    (evil-leader/set-key ",/" 'ido-find-file)
+    ))
+
 ; fuck tabs
 (setq-default indent-tabs-mode nil)
 
