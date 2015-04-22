@@ -42,6 +42,9 @@
 (depends-on "rinari")
 (depends-on "robe")
 
+; coffeescript
+(depends-on "coffee-mode")
+
 ;python
 (depends-on "elpy")
 (depends-on "jedi")

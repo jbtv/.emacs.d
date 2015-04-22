@@ -10,6 +10,7 @@
 (defun say-poo () (interactive) (message "Poo!"))
 
 (use-package haskell-mode)
+(use-package coffee-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit ... make it sensible for a vim user ... this was not straightfoward
