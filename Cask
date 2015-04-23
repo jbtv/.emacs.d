@@ -23,11 +23,13 @@
 
 ; clojure / emacs lisp
 ;(depends-on "hydra")
+(depends-on "clojure-mode")
+(depends-on "clojure-snippets")
+;(depends-on "clojure-jump-to-file"); FIXME https://github.com/marick/.emacs.d/blob/master/libs/clojure-jump-to-file.el
+(depends-on "midje-mode")
 (depends-on "eval-sexp-fu")
 (depends-on "cider-eval-sexp-fu")
-(depends-on "clojure-mode")
 (depends-on "clj-refactor")
-(depends-on "clojure-snippets")
 
 ; haskell
 (depends-on "haskell-mode")

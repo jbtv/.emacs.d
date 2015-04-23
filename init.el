@@ -465,7 +465,21 @@
     (evil-leader/set-key-for-mode 'clojure-mode "cc" 'cider-connect)
     (evil-leader/set-key-for-mode 'clojure-mode "ct" 'cider-test-run-tests)
     (evil-leader/set-key-for-mode 'clojure-mode "cr" 'toggle-nrepl-buffer)
-    (evil-leader/set-key-for-mode 'clojure-mode "cR" 'cider-project-reset)))
+    (evil-leader/set-key-for-mode 'clojure-mode "cR" 'cider-project-reset)
+
+    ;; make emacs understand midje test files
+    (use-package midje-mode
+      :config
+      (progn
+        (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+        (add-hook 'clojure-mode-hook 'midje-mode)
+        ;(require 'clojure-jump-to-file) ; investigate
+        (eval-after-load 'clojure-mode
+          '(define-clojure-indent
+             (fact 'defun)
+             (facts 'defun)
+             (against-background 'defun)
+             (provided 0)) )))))
 
 (dolist (mode '(clojure-mode clojurescript-mode cider-mode))
   (eval-after-load mode
