@@ -329,7 +329,7 @@
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-i"  ) 'eval-sexp-fu-eval-sexp-inner-sexp )
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-d"  ) 'eval-defun)
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-r"     ) 'eval-region                       )
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-r"     ) 'eval-region                       )
 ;eval-sexp-fu-eval-sexp-inner-list 
     
 
@@ -534,8 +534,13 @@
   :config
   (progn
     (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
-    (evil-leader/set-key-for-mode 'python-mode "wo" 'pyenv-workon)
-    (add-hook 'python-mode-hook #'(lambda () (elpy-enable))))) ; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
+    (evil-leader/set-key-for-mode 'python-mode "wo" 'pyvenv-workon)
+    (add-hook 'python-mode-hook #'(lambda () (elpy-enable)))
+
+    (evil-define-key 'normal python-mode-map (kbd "s-r" ) 'python-shell-send-region      )
+    (evil-define-key 'normal python-mode-map (kbd "s-\\ s-\\" ) 'python-shell-send-defun )
+
+    )) ; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
 
 ;(use-package jedi
 ;  :config
