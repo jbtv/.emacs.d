@@ -479,6 +479,7 @@
           '(define-clojure-indent
              (fact 'defun)
              (facts 'defun)
+             (checker 'defun)
              (against-background 'defun)
              (provided 0)) )))))
 
