@@ -410,6 +410,7 @@
   :config
   (progn
     (global-set-key [f9] 'cider-jack-in)
+    (global-set-key [f8] 'prettify-symbols-mode)
 
     (setq clojure--prettify-symbols-alist
           '(("fn"  . ?λ)
