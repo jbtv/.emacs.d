@@ -21,6 +21,15 @@
 (use-package haskell-mode)
 (use-package coffee-mode)
 
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
+(use-package github-browse-file
+  :init
+  (progn
+    (evil-leader/set-key ",ghb" 'github-browse-file)))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit ... make it sensible for a vim user ... this was not straightfoward
 ; the strategy employed is to nuke magit-mode's keymap and set evil-motion-state-map
