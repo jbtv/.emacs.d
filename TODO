@@ -1,5 +1,8 @@
 bind:
 
+search/replace to go with multi-cursors
+https://github.com/zk-phi/phi-search
+
 magit-ediff ... whatever mode that is I nuked it's default bindings
   need a, b, n, p, q -> find out where these are
 
@@ -22,6 +25,10 @@ http://oremacs.com/lispy
 SHELLS/INTERPRETERS
 http://www.emacswiki.org/emacs/SqlCompletion
 
+magit
+take a look at this guy's config
+https://github.com/martinp/emacs.d/blob/master/lisp/init-git.el
+
 
 NON-CODE
 http://www.gnu.org/software/emacs/manual/html_node/emacs/Text-Based-Tables.html
@@ -29,15 +36,6 @@ I might like to have completions from an english dictionary in some mode for edi
 
 switching to the right buffer (lots of features, horrible bindings)
 http://www.emacswiki.org/emacs/Icicles_-_Buffer-Name_Input
-
-
-e.g. set mode for certain file extensions
-  (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
-  (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
 
 
 Learn from https://github.com/expez/.emacs.d
