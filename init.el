@@ -96,6 +96,7 @@
   (progn
     (evil-leader/set-key ",mipro" (lambda () (interactive) (inf-mongo mongo-iris-prod-read-only)))
     (evil-leader/set-key ",mid" (lambda () (interactive) (inf-mongo mongo-iris-dev)))
+    (evil-leader/set-key ",mi2d" (lambda () (interactive) (inf-mongo mongo-iris-dev2)))
     (evil-leader/set-key ",mils" (lambda () (interactive) (inf-mongo mongo-iris-local-staging)))
     (evil-leader/set-key ",mis" (lambda () (interactive) (inf-mongo mongo-iris-staging))) 
     
