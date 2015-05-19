@@ -279,7 +279,7 @@
 ; it doesn't play nicely with git-gutter and might break autocomplete?
 ;(global-relative-line-numbers-mode)
 
-(let ((font "Menlo:pixelsize=18"))
+(let ((font "Menlo:pixelsize=14"))
   (set-face-attribute 'default nil :font font)
   (set-frame-font font nil t))
 
