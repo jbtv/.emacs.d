@@ -149,7 +149,7 @@
     (evil-leader/set-key "pk" 'projectile-kill-buffers)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; my own first emacs plugin
+;; my own first emacs plugin
 (use-package instant-markdown
   :config
   (progn
@@ -420,6 +420,14 @@
   (progn
     (global-set-key [f9] 'cider-jack-in)
     (global-set-key [f8] 'prettify-symbols-mode)
+
+    ;; cool Georgian chars:
+    ;; ა ბ გ დ ე ვ ზ თ ი კ ლ მ ნ ო პ
+    ;; ჟ რ ს ტ უ ფ ქ ღ ყ შ ჩ ც ძ წ ჭ
+    ;; ხ ჯ ჰ ჱ ჲ ჳ ჴ ჵ ჶ ჷ ჸ ჹ ჺ
+
+    ;; there's Greek, Lao, Arabic
+    
 
     (setq clojure--prettify-symbols-alist
           '(("fn"  . ?λ)
