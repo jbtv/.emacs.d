@@ -6,6 +6,9 @@ https://github.com/zk-phi/phi-search
 magit-ediff ... whatever mode that is I nuked it's default bindings
   need a, b, n, p, q -> find out where these are
 
+magit git-flow
+https://github.com/zachallaun/emacs-config/blob/master/lib/magit/magit-flow.el
+
 https://github.com/m2ym/popwin-el <-- looks good to me, manage these extra buffers *Messages* *Completions* etc ... but doesn't have an elpa package?
 
 PYTHON TODO
