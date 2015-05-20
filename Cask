@@ -13,6 +13,12 @@
 (depends-on "ace-jump-mode")
 (depends-on "aggressive-indent")
 
+;; colors! (didn't work for me)
+;; (depends-on "load-theme-buffer-local")
+
+;; rememberances
+(depends-on "saveplace")
+
 ; To be investigated
 ;(depends-on "helm-swoop") ; find the right occurrence of search term with many occurrences
 ;(depends-on "minimap") ; sublime-style ... maybe give it a shot
@@ -41,9 +47,12 @@
 (depends-on "irony-eldoc")
 
 ;ruby 
+(depends-on "flymake-ruby")
+(depends-on "projectile-rails")
 (depends-on "rvm")
 (depends-on "rinari")
 (depends-on "robe")
+(depends-on "web-mode")
 
 ; coffeescript
 (depends-on "coffee-mode")

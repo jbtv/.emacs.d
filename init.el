@@ -22,6 +22,48 @@
 ;; I occasionally want this
 (setq x-select-enable-clipboard t)
 
+;; well, it sounds good...
+(prefer-coding-system 'utf-8)
+
+;; always reload buffer if file has changed
+;; (global-auto-revert-mode 1)
+
+;; the squeeze
+;; (setq-default line-spacing 0)
+
+;; left-padding ... ?
+(set-fringe-mode '(10 . 0))
+
+
+;; Store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+(use-package saveplace
+  :config
+  (progn
+    (setq-default save-place t)
+    (setq save-place-file (expand-file-name ".places" user-emacs-directory))))
+
+;; buffer-local color themes sounds awesome, but this did not work:
+;;(use-package load-theme-buffer-local
+;;  :init
+;;  (progn
+;;    (add-hook 'emacs-lisp-mode-hook (lambda nil (load-theme-buffer-local 'tango (current-buffer))))))
+;;(load-theme-buffer-local 'solarized-dark (current-buffer))
+
+
+;; try this:
+;;(require 'fullframe)
+;;(fullframe magit-status magit-mode-quit-window nil)
+;; Fullframe saves your window configuration before displaying the next command in the entire Emacs window.
+;; When the command finishes, it restores your previous window configuration.
+;; I use this with Magit to see the git diff maximized. Then when I quit Magit,
+;; I'm back where I was with my window splits restored.
+
+
 ;; for debugging keybindings
 (defun say-poo () (interactive) (message "Poo!"))
 
@@ -260,12 +302,10 @@
   :config
   (progn
 
-    (add-to-list 'company-backends 'company-c-headers)
-    (setq company-backends (delete 'company-semantic company-backends))
-    (define-key c-mode-map  [(tab)] 'company-complete)
-    (define-key c++-mode-map  [(tab)] 'company-complete)
-    (eval-after-load 'company
-      '(push 'company-robe company-backends))
+    ;;(add-to-list 'company-backends 'company-c-headers)
+    ;;(setq company-backends (delete 'company-semantic company-backends))
+    ;;(define-key c-mode-map  [(tab)] 'company-complete)
+    ;;(define-key c++-mode-map  [(tab)] 'company-complete)
 
     (defun indent-or-complete ()
       (interactive)
@@ -385,12 +425,12 @@
 ;    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 ;    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
 
-; yasnippet (required for certain features of clj-refactor)
-(use-package yasnippet
-  :init
-  (progn
-    (yas-global-mode 1)
-    (use-package clojure-snippets)))
+;; yasnippet (required for certain features of clj-refactor)
+;;(use-package yasnippet
+;;  :init
+;;  (progn
+;;    (yas-global-mode 1)
+;;    (use-package clojure-snippets)))
 
 ;(use-package clj-refactor
 ;  :init
@@ -533,16 +573,37 @@
 ;;; ruby ;;;
 ;;;;;;;;;;;;
 
+;; some hints here:
+;; http://lorefnon.me/2014/02/02/configuring-emacs-for-rails.html
+
+(use-package web-mode
+  :config
+  (progn
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))))
+
+(use-package flymake-ruby
+  :config
+  (progn
+    (add-hook 'ruby-mode-hook 'flymake-ruby-load)))
+
+
 (use-package robe
   :init
   (progn
+    (setq ruby-deep-indent-paren nil) ;; indent inside parens just like anywhere else
+
     (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
       (rvm-activate-corresponding-ruby))
 
     (evil-define-key 'normal robe-mode-map (kbd "g f") 'robe-jump)
     (evil-define-key 'normal robe-mode-map (kbd "g d") 'robe-doc)
     
-    (add-hook 'robe-mode-hook 'ac-robe-setup) ; TODOcompletion with company
+    ;(add-hook 'robe-mode-hook 'ac-robe-setup) ; TODOcompletion with company
+    (eval-after-load 'company
+      '(add-to-list 'company-backends 'company-robe)
+      )
+;;'(push 'company-robe company-backends)
+
     (add-hook 'ruby-mode-hook 'robe-mode))
   :config
   (progn
@@ -554,9 +615,41 @@
     (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
     (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))))
 
-(use-package rinari
-  :init
+(use-package projectile-rails
+  :config
   (progn
+    (add-hook 'projectile-mode-hook 'projectile-rails-on)
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jcon" 'projectile-rails-find-controller                )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-controller        )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-fixture           )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-helper            )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-javascript        )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-migration         )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-model             )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-spec              )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-stylesheet        )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-test              )
+    ;;(evil-leader/set-key-for-mode 'projectile-rails-mode ",j" 'projectile-rails-find-current-view              )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jenv" 'projectile-rails-find-environment               )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jfea" 'projectile-rails-find-feature                   )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jfix" 'projectile-rails-find-fixture                   )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jhlp" 'projectile-rails-find-helper                    )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jini" 'projectile-rails-find-initializer               )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jjs" 'projectile-rails-find-javascript                )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jjob" 'projectile-rails-find-job                       )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jlay" 'projectile-rails-find-layout                    )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jlib" 'projectile-rails-find-lib                       )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jloc" 'projectile-rails-find-locale                    )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jlog" 'projectile-rails-find-log                       )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jmai" 'projectile-rails-find-mailer                    )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jmig" 'projectile-rails-find-migration                 )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jmod" 'projectile-rails-find-model                     )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jrak" 'projectile-rails-find-rake-task                 )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jspe" 'projectile-rails-find-spec                      )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jcss" 'projectile-rails-find-stylesheet                )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jtes" 'projectile-rails-find-test                      )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jval" 'projectile-rails-find-validator                 )
+    (evil-leader/set-key-for-mode 'projectile-rails-mode ",jvie" 'projectile-rails-find-view                      ) 
     ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
