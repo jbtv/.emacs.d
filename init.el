@@ -295,6 +295,7 @@
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 
+;; http://www.emacswiki.org/emacs/CompanyMode#toc4
 (use-package company
   :init (global-company-mode)
 ;(add-hook 'cider-repl-mode-hook #'company-mode)
