@@ -13,6 +13,7 @@
 
 ; fuck tabs
 (setq-default indent-tabs-mode nil)
+(evil-leader/set-key "fi" 'indent-region)
 
 
 ; for debugging keybindings
