@@ -11,7 +11,7 @@
     (evil-leader/set-key ",/" 'ido-find-file)
     ))
 
-; fuck tabs
+;; fuck tabs
 (setq-default indent-tabs-mode nil)
 (evil-leader/set-key "fi" 'indent-region)
 
@@ -19,9 +19,10 @@
 (setq scroll-margin 5
       scroll-preserve-screen-position 1)
 
+;; I occasionally want this
+(setq x-select-enable-clipboard t)
 
-
-; for debugging keybindings
+;; for debugging keybindings
 (defun say-poo () (interactive) (message "Poo!"))
 
 (use-package haskell-mode)
