@@ -467,6 +467,8 @@
         (setq cider-prompt-save-file-on-load nil))))
   :config
   (progn
+
+    (add-hook 'clojure-mode-hook #'(lambda () (modify-syntax-entry ?- "w")))
     (global-set-key [f9] 'cider-jack-in)
     (global-set-key [f8] 'prettify-symbols-mode)
 
