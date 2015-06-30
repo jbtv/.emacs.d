@@ -9,6 +9,10 @@
   (interactive)
   (sql-connect-preset 'tom-dev))
 
+(defun sql-tom-prod ()
+  (interactive)
+  (sql-connect-preset 'tom-prod))
+
 (defun sql-local ()
   (interactive)
   (sql-connect-preset 'local))
