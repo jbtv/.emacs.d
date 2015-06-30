@@ -1,5 +1,8 @@
 bind:
 
+Gist support
+https://github.com/defunkt/gist.el
+
 maybe check out swiper (search pkg)
 
 exec-path-from-shell-initialize <-- does this fix my PATH issues when I start emacs from yeganesh?
