@@ -81,6 +81,7 @@
 (depends-on "flycheck-cask")
 (depends-on "htmlize")
 (depends-on "idle-highlight-mode")
+(depends-on "yaml-mode" :git "git@github.com:yoshiki/yaml-mode.git" :ref "master")
 
 (depends-on "magit")
 (depends-on "git-gutter")
