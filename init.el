@@ -15,6 +15,25 @@
 (setq-default indent-tabs-mode nil)
 (evil-leader/set-key "fi" 'indent-region)
 
+;; backup file settings
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups"))) ;; fuck putting backup files everywhere I work
+(setq delete-old-versions -1) ;; keep them forever
+(setq version-control t) ;; versioned backup files
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+
+;; save and restore some history
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring))
+
 ;; some scroll adjustments
 (setq scroll-margin 5
       scroll-preserve-screen-position 1)
@@ -35,17 +54,14 @@
 (set-fringe-mode '(10 . 0))
 
 
-;; Store all backup and autosave files in the tmp dir
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
 (use-package saveplace
   :config
   (progn
     (setq-default save-place t)
     (setq save-place-file (expand-file-name ".places" user-emacs-directory))))
+
+;; treat - as a word char in emacs lisp (same for clojure)
+(add-hook 'emacs-lisp-mode-hook #'(lambda () (modify-syntax-entry ?- "w")))
 
 ;; buffer-local color themes sounds awesome, but this did not work:
 ;;(use-package load-theme-buffer-local
@@ -329,8 +345,9 @@
 ; visuals ;
 ;;;;;;;;;;;
 
-(load-theme 'solarized-dark t)
-(menu-bar-mode -1)
+(load-theme 'solarized-dark t) ;; feels like home
+(menu-bar-mode -1)             ;; turn off various GUI crap
+(tooltip-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ; I think this may have been mostly obsoleted for me by things like ace-jump
@@ -472,12 +489,17 @@
         (setq cider-repl-history-file "~/.emacs.d/nrepl-history")
         (setq cider-repl-pop-to-buffer-on-connect nil)
         (setq cider-repl-use-clojure-font-lock t)
-        (setq cider-auto-select-error-buffer nil)
+        ;;(setq cider-auto-select-error-buffer nil)
         (setq cider-prompt-save-file-on-load nil))))
   :config
   (progn
 
-    (add-hook 'clojure-mode-hook #'(lambda () (modify-syntax-entry ?- "w")))
+    ;; I find it extremely annoying to have exceptions take over a frame with this buffer so I shut it off:
+    (setq cider-show-error-buffer nil)
+
+    (add-hook 'clojure-mode-hook #'(lambda ()
+                                     (modify-syntax-entry ?- "w")
+                                     (modify-syntax-entry ?> "w")))
     (global-set-key [f9] 'cider-jack-in)
     (global-set-key [f8] 'prettify-symbols-mode)
 
