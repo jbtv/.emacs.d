@@ -11,6 +11,8 @@
     (evil-leader/set-key ",/" 'ido-find-file)
     ))
 
+(setq vc-follow-symlinks t)
+
 ;; fuck tabs
 (setq-default indent-tabs-mode nil)
 (evil-leader/set-key "fi" 'indent-region)
