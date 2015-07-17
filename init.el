@@ -159,6 +159,7 @@
 (use-package inf-mongo
   :config
   (progn
+    (evil-leader/set-key ",miprw" (lambda () (interactive) (inf-mongo mongo-iris-prod-rw)))
     (evil-leader/set-key ",mipsro" (lambda () (interactive) (inf-mongo mongo-iris-prod-slave-read-only)))
     (evil-leader/set-key ",mipro" (lambda () (interactive) (inf-mongo mongo-iris-prod-read-only)))
     (evil-leader/set-key ",mid" (lambda () (interactive) (inf-mongo mongo-iris-dev)))
