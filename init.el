@@ -17,6 +17,15 @@
 (setq-default indent-tabs-mode nil)
 (evil-leader/set-key "fi" 'indent-region)
 
+;; educational!
+;;(defun nrepl-reset ()
+;;  (interactive)
+;;  (save-some-buffers)
+;;  (set-buffer "*nrepl*")
+;;  (goto-char (point-max))
+;;  (insert "(user/reset)")
+;;  (nrepl-return))
+
 ;; backup file settings
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups"))) ;; fuck putting backup files everywhere I work
 (setq delete-old-versions -1) ;; keep them forever
