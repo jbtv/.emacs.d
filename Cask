@@ -9,7 +9,8 @@
 (depends-on "evil")
 (depends-on "evil-leader")
 (depends-on "evil-surround")
-(depends-on "evil-smartparens")
+;;(depends-on "evil-smartparens")
+(depends-on "lispy")
 (depends-on "ace-jump-mode")
 (depends-on "aggressive-indent")
 

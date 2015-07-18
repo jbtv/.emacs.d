@@ -204,12 +204,12 @@
     ))
 
 ; FIXME want it ... but disabled it because it fucks with comments when I move over them with evil motions
-;(use-package aggressive-indent
-;  :init
-;  (progn
-;    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-;    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-;    (add-hook 'css-mode-hook #'aggressive-indent-mode)))
+(use-package aggressive-indent
+  :init
+  (progn
+    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+    (add-hook 'css-mode-hook #'aggressive-indent-mode)))
 
 
 (use-package projectile
@@ -249,25 +249,25 @@
       :config
       (progn
         (evil-leader/set-leader ",")
-        ;(evil-leader/in-all-states) ; not working, try again
-        ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-        ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-        ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-        ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+        ;;(evil-leader/in-all-states) ; not working, try again
+        ;;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+        ;;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+        ;;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+        ;;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-        ; TODO revive these and use "s-, r" bindings
-        ;(evil-leader/set-key-for-mode 'clojure-mode "ral" 'cljr-add-missing-libspec)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rai" 'cljr-add-import)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rar" 'cljr-add-require)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rci" 'cljr-cycle-if)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rdk" 'cljr-destructure-keys)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "ril" 'cljr-introduce-let)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rel" 'cljr-expand-let)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "ref" 'cljr-extract-function)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rfu" 'cljr-find-usages)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rml" 'cljr-move-to-let)
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rpf" 'cljr-promote-function )
-        ;(evil-leader/set-key-for-mode 'clojure-mode "rrs" 'cljr-rename-symbol)
+        ;; TODO revive these and use "s-, r" bindings
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "ral" 'cljr-add-missing-libspec)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rai" 'cljr-add-import)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rar" 'cljr-add-require)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rci" 'cljr-cycle-if)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rdk" 'cljr-destructure-keys)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "ril" 'cljr-introduce-let)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rel" 'cljr-expand-let)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "ref" 'cljr-extract-function)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rfu" 'cljr-find-usages)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rml" 'cljr-move-to-let)
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rpf" 'cljr-promote-function )
+        ;;(evil-leader/set-key-for-mode 'clojure-mode "rrs" 'cljr-rename-symbol)
         (evil-leader/set-key-for-mode 'sql-mode "er" 'sql-send-region)
         (evil-leader/set-key "b." 'previous-buffer)
         (evil-leader/set-key "b," 'next-buffer)
@@ -286,6 +286,19 @@
       :init (global-evil-surround-mode 1)))
   :config
   (progn
+    ;; remove all keybindings from insert-state keymap
+    (setcdr evil-insert-state-map nil)
+    ;; but [escape] should switch back to normal state
+    (define-key evil-insert-state-map [escape] 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "jk") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "jj") 'insert-jay)
+    
+    (defun insert-jay ()
+      (interactive)
+      (insert "j"))
+    (evil-mode)
+
+    (define-key evil-insert-state-local-map (kbd "C-d") nil) 
     (setq evil-cross-lines t)
     (setq evil-move-cursor-back nil)
     (setq-default truncate-lines t)))
@@ -383,71 +396,16 @@
     (add-hook 'emacs-lisp-mode-hook #'init-sexp-fu)
     ))
 
-(use-package evil-smartparens
-  :init
-  (progn
-    (add-hook 'clojure-mode-hook #'evil-smartparens-mode)
-    (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
-    (add-hook 'emacs-lisp-mode-hook #'evil-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
-
-    ; navigation
-    ;   jk move among siblings
-    ;   hl move up and down the tree
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-l") 'sp-down-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-h") 'sp-backward-up-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-j") 'sp-next-sexp )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-k") '(lambda () (interactive) ( sp-next-sexp -1 ) ))
-
-    ; barf/slurp
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-]") 'sp-forward-slurp-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-}") 'sp-forward-barf-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-[") 'sp-backward-slurp-sexp)
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-{") 'sp-backward-barf-sexp)
-
-
-    ; killing/copying
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-L"     ) 'sp-kill-sexp          )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-H"     ) 'sp-backward-kill-sexp )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-l" ) 'sp-copy-sexp          )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-c s-h" ) 'sp-backward-copy-sexp )
-
-    ; eval clojure
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-SPC" ) 'cider-pprint-eval-defun-at-point )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-\\"  ) 'cider-eval-defun-at-point        )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-f"   ) 'cider-eval-last-sexp-and-replace )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-\\ s-b"   ) 'cider-eval-buffer                )
-    (evil-define-key 'normal clojure-mode-map (kbd "s-r"   ) 'cider-eval-region                )
-    
-    ; eval el
-    ;(evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-SPC" ) ') ; no equivalent of the clj one
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-\\" ) 'eval-sexp-fu-eval-sexp-inner-list )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-i"  ) 'eval-sexp-fu-eval-sexp-inner-sexp )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-d"  ) 'eval-defun)
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-\\ s-b"     ) 'eval-buffer                       )
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "s-r"     ) 'eval-region                       )
-;eval-sexp-fu-eval-sexp-inner-list 
-    
-
-    ; weird shit
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-u") 'sp-unwrap-sexp                  )
-    (evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-s") 'sp-transpose-sexp               )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-d") 'sp-backward-unwrap-sexp         )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-f") 'sp-splice-sexp                  ) ; just like unwrap?
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-g") 'sp-splice-sexp-killing-forward  )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-h") 'sp-splice-sexp-killing-backward )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-k") 'sp-splice-sexp-killing-around   )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-l") 'sp-convolute-sexp               )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-;") 'sp-absorb-sexp                  )
-    ;(evil-define-key 'normal evil-smartparens-mode-map (kbd "s-, s-SPC") 'sp-emit-sexp                    )
-    
-    )
+(use-package lispy
   :config
   (progn
-    (sp-with-modes '(clojure-mode emacs-lisp-mode)
-      (sp-local-pair "'" nil :actions nil)))) ; for lisp modes do not treat single-quote as a pairing
+    (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+    (evil-leader/set-key-for-mode 'clojure-mode "cd" 'lispy-describe-inline)
+    (evil-leader/set-key-for-mode 'clojure-mode "ca" 'lispy-describe-inline)
 
-                                        ;(use-package irony-eldoc)
+    ))
+
+;(use-package irony-eldoc)
 ;(use-package company-irony)
 ;(use-package irony-mode
 ;  :init
@@ -471,6 +429,7 @@
 ;;    (yas-global-mode 1)
 ;;    (use-package clojure-snippets)))
 
+;; TODO turn this on
 ;(use-package clj-refactor
 ;  :init
 ;  (progn
@@ -490,9 +449,9 @@
     (use-package cider
       :init
       (progn
-        ;(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+                                        ;(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
         (add-hook 'cider-repl-mode-hook 'subword-mode)
-        ;(use-package slamhound)
+                                        ;(use-package slamhound)
 	)
       :config
       (progn
@@ -547,18 +506,18 @@
             ("identical?" . ?≡ )
             ;;("->" . ?→)
             ;;("->>" . ?⇒)
-            ;("<!" . ?⪡) ;; wtf happened here? same font Menlo-Regular.ttf, doesn't have these unicode chars on my new workstation
-            ;(">!" . ?⪢ )
-            ;("<!!" . ?⫷ )
-            ;(">!!" . ?⫸ )
-            ;("" . ?◉ )
-            ;("" . ?⧬ )
-            ;("" . ?⧲ )
-            ;("" . ?⚇ )
-            ;("" . ?◍ )
-            ;⟅ ⟆ ⦓ ⦔ ⦕ ⦖ ⸦ ⸧ ⸨ ⸩ ｟ ｠ ⧘ ⧙ ⧚ ⧛ ︷ ︸
-            ;∾ ⊺ ⋔ ⫚ ⟊ ⟔ ⟓ ⟡ ⟢ ⟣ ⟤ ⟥
-            ;("" . ? )
+            ;;("<!" . ?⪡) ;; wtf happened here? same font Menlo-Regular.ttf, doesn't have these unicode chars on my new workstation
+            ;;(">!" . ?⪢ )
+            ;;("<!!" . ?⫷ )
+            ;;(">!!" . ?⫸ )
+            ;;("" . ?◉ )
+            ;;("" . ?⧬ )
+            ;;("" . ?⧲ )
+            ;;("" . ?⚇ )
+            ;;("" . ?◍ )
+            ;;⟅ ⟆ ⦓ ⦔ ⦕ ⦖ ⸦ ⸧ ⸨ ⸩ ｟ ｠ ⧘ ⧙ ⧚ ⧛ ︷ ︸
+            ;;∾ ⊺ ⋔ ⫚ ⟊ ⟔ ⟓ ⟡ ⟢ ⟣ ⟤ ⟥
+            ;;      ("" . ? )
             ))
 
     (defun toggle-nrepl-buffer ()
@@ -573,7 +532,7 @@
       (cider-interactive-eval "(reloaded.repl/reset)"))
 
     (evil-leader/set-key-for-mode 'clojure-mode "cns" 'cider-repl-set-ns)
-    (evil-leader/set-key-for-mode 'clojure-mode "cd" 'cider-doc)
+    ;; (evil-leader/set-key-for-mode 'clojure-mode "cd" 'cider-doc)
     (evil-leader/set-key-for-mode 'clojure-mode "cj" 'cider-jump-to-var)
     (evil-leader/set-key-for-mode 'clojure-mode "ch" 'cider-jump-back)
     (evil-leader/set-key-for-mode 'clojure-mode "cc" 'cider-connect)
@@ -587,7 +546,7 @@
       (progn
         (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
         (add-hook 'clojure-mode-hook 'midje-mode)
-        ;(require 'clojure-jump-to-file) ; investigate
+        ;;(require 'clojure-jump-to-file) ; investigate
         (eval-after-load 'clojure-mode
           '(define-clojure-indent
              (fact 'defun)
@@ -614,6 +573,7 @@
 
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+
 
 
 ;;;;;;;;;;;;
