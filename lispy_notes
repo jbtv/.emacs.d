@@ -1,0 +1,21 @@
+to bind:
+lispy-arglist-inline
+lispy-describe-inline
+
+w and s MOVE sexp up or down
+
+C - convolute - is cool, swaps containing and the containing's containing
+
+>< slurp and barf
+
+ACE JUMPISH
+  q - just jump to an open paren
+  a - pick a symbol and then do something with it:
+        eval, describe, follow, raise
+        m - gets out of that symbol-pickin and edits
+  H - replace symbol
+
+hjkl move around but I always seem to go OUTWARDS
+how do I get in? ace-jump all the time?
+
+jump all the time
