@@ -291,12 +291,6 @@
     (setcdr evil-insert-state-map nil)
     ;; but [escape] should switch back to normal state
     (define-key evil-insert-state-map [escape] 'evil-normal-state)
-    (define-key evil-insert-state-map (kbd "jk") 'evil-normal-state)
-    (define-key evil-insert-state-map (kbd "jj") 'insert-jay)
-    
-    (defun insert-jay ()
-      (interactive)
-      (insert "j"))
     (evil-mode)
 
     (define-key evil-insert-state-local-map (kbd "C-d") nil) 
