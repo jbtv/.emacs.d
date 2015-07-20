@@ -461,6 +461,8 @@
   :config
   (progn
 
+    (define-key clojure-mode-map (kbd "s-]") 'cider-jump-to-var)
+    (define-key clojure-mode-map (kbd "s-[") 'cider-jump-back)
     (define-key clojure-mode-map (kbd "s-.")         'lispy-describe-inline)
     (define-key clojure-mode-map (kbd "s-,")         'lispy-arglist-inline) 
     (define-key clojure-mode-map (kbd "s-m")         'lispy-eval-and-comment)
