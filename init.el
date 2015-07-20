@@ -98,7 +98,8 @@
 (use-package coffee-mode)
 
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+      browse-url-generic-program "google-chrome"
+      browse-url-generic-args '( "--incognito" ))  
 
 (use-package github-browse-file
   :init
