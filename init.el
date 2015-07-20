@@ -395,9 +395,10 @@
   :config
   (progn
     (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-    (evil-leader/set-key-for-mode 'clojure-mode "cd" 'lispy-describe-inline)
-    (evil-leader/set-key-for-mode 'clojure-mode "ca" 'lispy-describe-inline)
 
+    (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
+    (define-key emacs-lisp-mode-map (kbd "s-\\ s-\\"  ) 'eval-last-sexp        )
+    ;; (lispy-set-key-theme '(special paredit))
     ))
 
 ;(use-package irony-eldoc)
@@ -460,10 +461,25 @@
   :config
   (progn
 
+    (define-key clojure-mode-map (kbd "s-.")         'lispy-describe-inline)
+    (define-key clojure-mode-map (kbd "s-,")         'lispy-arglist-inline) 
+    (define-key clojure-mode-map (kbd "s-m")         'lispy-eval-and-comment)
+    (define-key clojure-mode-map (kbd "s-SPC" )      'cider-pprint-eval-defun-at-point )
+    (define-key clojure-mode-map (kbd "s-\\"  )      'cider-eval-defun-at-point        )
+    (define-key clojure-mode-map (kbd "s-n"   )      'cider-eval-ns-form)
+    (define-key clojure-mode-map (kbd "s-b"   )      'cider-eval-buffer                )
+    (define-key clojure-mode-map (kbd "s-j"   )      'lispy-eval-and-comment                )
+    (define-key clojure-mode-map (kbd "s-r"   )      'cider-eval-region                ) 
+    (define-key clojure-mode-map (kbd "s-h"   )      'cider-eval-print-handler                ) 
+    (define-key clojure-mode-map (kbd "s-l"   )      'cider-eval-print-last-sexp                ) 
+    (define-key clojure-mode-map (kbd "s-]"   )      'cider-eval-last-sexp-and-replace                ) 
+
+
     ;; I find it extremely annoying to have exceptions take over a frame with this buffer so I shut it off:
     (setq cider-show-error-buffer nil)
 
     (add-hook 'clojure-mode-hook #'(lambda ()
+                                     (modify-syntax-entry ?_ "w")
                                      (modify-syntax-entry ?- "w")
                                      (modify-syntax-entry ?> "w")))
     (global-set-key [f9] 'cider-jack-in)
