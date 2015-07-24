@@ -116,31 +116,31 @@
   :init
   (progn
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; bindings to enter various magit modes
+    ;; bindings to enter various magit modes
     (evil-leader/set-key "gs" 'magit-status)
     (evil-leader/set-key "gd" 'magit-diff-unstaged)
     (evil-leader/set-key "qc" (lambda () (interactive) (call-interactively 'magit-stage-all) (call-interactively 'magit-commit)))
     
-    ;(evil-leader/set-key "gco" 'magit-checkout)
+    ;;(evil-leader/set-key "gco" 'magit-checkout)
     (evil-leader/set-key "gl" 'magit-log)
 
     (evil-leader/set-key "gb" 'magit-blame-mode)
     (evil-leader/set-key-for-mode 'magit-blame-mode "gb" 'magit-blame-locate-commit)
 
-    ; for tiny quick commits, skip some fluff:
+    ;; for tiny quick commits, skip some fluff:
     (defun magit-quick-commit () (interactive) (magit-stage-all) (magit-commit))
     (evil-leader/set-key "g,c" 'magit-quick-commit)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; load my evil overrides for magit-*-mode
+    ;; load my evil overrides for magit-*-mode
     (load "~/.emacs.d/evil-magit.el")
     (set-evil-magit-bindings)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; start commit with insert mode
+    ;; start commit with insert mode
     (evil-set-initial-state 'git-commit-mode 'insert)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; silence the warning that buffers out of sync with the index will be auto-reverted
+    ;; silence the warning that buffers out of sync with the index will be auto-reverted
     (setq magit-last-seen-setup-instructions "1.4.0"))
   :config
   (progn
@@ -156,15 +156,15 @@
     (global-git-gutter-mode +1)
     (global-set-key (kbd "M-n") 'git-gutter:next-hunk)
     (global-set-key (kbd "M-p") 'git-gutter:previous-hunk)
-    ;(global-define-key (kbd "") 'git-gutter:do-stage-hunk)
+    ;;(global-define-key (kbd "") 'git-gutter:do-stage-hunk)
     ))
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; shells, embedded external tools, aliases for environment variables
+;; shells, embedded external tools, aliases for environment variables
 
-; FIXME ... this is very specific to me and I should find another way of doing this
+;; FIXME ... this is very specific to me and I should find another way of doing this
 (load "/home/blake/.sensitive.el")
 (load "~/.emacs.d/mysql.el")
 
@@ -182,7 +182,7 @@
     ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; uber emacs features
+;; uber emacs features
 
 (use-package ace-jump-mode
   :init
@@ -204,7 +204,7 @@
                                          (char-to-string query-char-2)))))
     ))
 
-; FIXME want it ... but disabled it because it fucks with comments when I move over them with evil motions
+;; FIXME want it ... but disabled it because it fucks with comments when I move over them with evil motions
 (use-package aggressive-indent
   :init
   (progn
@@ -218,9 +218,9 @@
   (progn
     (projectile-global-mode)
     (setq projectile-completion-system 'grizzl)
-    ; annoying, this does not work at all, making ,pf USELESS and ,pg bad
-    ; (add-to-list 'projectile-globally-ignored-files "*.~undo-tree~")
-    ;(setq projectile-use-native-indexing t)
+    ;; annoying, this does not work at all, making ,pf USELESS and ,pg bad
+    ;; (add-to-list 'projectile-globally-ignored-files "*.~undo-tree~")
+    ;;(setq projectile-use-native-indexing t)
     )
   :config
   (progn
@@ -236,7 +236,7 @@
     (evil-leader/set-key ",mp" 'instant-md-start)))
 
 ;;;;;;;;;;;;;;;;;;;;;;
-; making it vim-like ;
+;; making it vim-like ;
 ;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package evil
@@ -244,7 +244,7 @@
   :init
   (progn
     (load "~/.emacs.d/make-everything-evil.el")
-    (global-set-key (kbd "<f5>" ) 'evil-mode) ; handy until I fix all the major modes which do not have evil-motion
+    (global-set-key (kbd "<f5>" ) 'evil-mode) ;; handy until I fix all the major modes which do not have evil-motion
     (use-package evil-leader
       :init (global-evil-leader-mode)
       :config
@@ -279,7 +279,7 @@
         (evil-leader/set-key "bd" 'kill-buffer)
         (evil-leader/set-key ",s" 'shell)
         (evil-leader/set-key ",x" 'smex)
-        (evil-leader/set-key ",,x" 'smex-major-mode-commands) ; not sure I like these bindings being evil-only, they should be global
+        (evil-leader/set-key ",,x" 'smex-major-mode-commands) ;; not sure I like these bindings being evil-only, they should be global
         (evil-leader/set-key ",w" 'make-frame)
         (evil-leader/set-key ",do" 'delete-other-windows)
 	))
@@ -324,7 +324,7 @@
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
 
-;(require 'company-clang)
+;;(require 'company-clang)
 (require 'company-c-headers)
 (require 'irony)
 (require 'irony-eldoc)
@@ -343,8 +343,8 @@
 ;; http://www.emacswiki.org/emacs/CompanyMode#toc4
 (use-package company
   :init (global-company-mode)
-;(add-hook 'cider-repl-mode-hook #'company-mode)
-;(add-hook 'cider-mode-hook #'company-mode)
+;;(add-hook 'cider-repl-mode-hook #'company-mode)
+;;(add-hook 'cider-mode-hook #'company-mode)
   :config
   (progn
 
@@ -362,7 +362,7 @@
     (global-set-key "\t" 'indent-or-complete)))
 
 ;;;;;;;;;;;
-; visuals ;
+;; visuals ;
 ;;;;;;;;;;;
 
 (load-theme 'solarized-dark t) ;; feels like home
@@ -370,16 +370,16 @@
 (tooltip-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-; I think this may have been mostly obsoleted for me by things like ace-jump
-; it doesn't play nicely with git-gutter and might break autocomplete?
-;(global-relative-line-numbers-mode)
+;; I think this may have been mostly obsoleted for me by things like ace-jump
+;; it doesn't play nicely with git-gutter and might break autocomplete?
+;;(global-relative-line-numbers-mode)
 
 (let ((font "Menlo:pixelsize=14"))
   (set-face-attribute 'default nil :font font)
   (set-frame-font font nil t))
 
 ;;;;;;;;;;;
-; clojure ;
+;; clojure ;
 ;;;;;;;;;;;
 
 (use-package cider-eval-sexp-fu
@@ -401,22 +401,22 @@
     ;; (lispy-set-key-theme '(special paredit))
     ))
 
-;(use-package irony-eldoc)
-;(use-package company-irony)
-;(use-package irony-mode
-;  :init
-;  (progn
-;    (add-hook 'c++-mode-hook 'irony-mode)
-;    (add-hook 'c-mode-hook 'irony-mode)
-;    (add-hook 'objc-mode-hook 'irony-mode)
-;
-;    (defun my-irony-mode-hook ()
-;      (define-key irony-mode-map [remap completion-at-point]
-;        'irony-completion-at-point-async)
-;      (define-key irony-mode-map [remap complete-symbol]
-;        'irony-completion-at-point-async))
-;    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-;    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
+;;(use-package irony-eldoc)
+;;(use-package company-irony)
+;;(use-package irony-mode
+;;  :init
+;;  (progn
+;;    (add-hook 'c++-mode-hook 'irony-mode)
+;;    (add-hook 'c-mode-hook 'irony-mode)
+;;    (add-hook 'objc-mode-hook 'irony-mode)
+;;
+;;    (defun my-irony-mode-hook ()
+;;      (define-key irony-mode-map [remap completion-at-point]
+;;        'irony-completion-at-point-async)
+;;      (define-key irony-mode-map [remap complete-symbol]
+;;        'irony-completion-at-point-async))
+;;    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+;;    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)))
 
 ;; yasnippet (required for certain features of clj-refactor)
 ;;(use-package yasnippet
@@ -426,17 +426,17 @@
 ;;    (use-package clojure-snippets)))
 
 ;; TODO turn this on
-;(use-package clj-refactor
-;  :init
-;  (progn
-;    (add-hook 'clojure-mode-hook (lambda ()
-;                                   (clj-refactor-mode 1)
-;                                   (setq cljr-magic-requires t) ; turned this off because it is _crazy_ slow even with an empty file!
-;                                   ;(evil-leader/set-leader ",")
-;					;(evil-leader/set-key "" 'cljr-)
-;                                   ;(evil-leader/set-key "" 'cljr-)
-;                                   ;(evil-leader/set-key "" 'cljr-)
-;                                   ))))
+;;(use-package clj-refactor
+;;  :init
+;;  (progn
+;;    (add-hook 'clojure-mode-hook (lambda ()
+;;                                   (clj-refactor-mode 1)
+;;                                   (setq cljr-magic-requires t) ; turned this off because it is _crazy_ slow even with an empty file!
+;;                                        ;;(evil-leader/set-leader ",")
+;;                                        ;;(evil-leader/set-key "" 'cljr-)
+;;                                        ;;(evil-leader/set-key "" 'cljr-)
+;;                                        ;;(evil-leader/set-key "" 'cljr-)
+;;                                   ))))
 
 (use-package clojure-mode
   :mode ("\\.edn$" . clojure-mode)
@@ -445,9 +445,9 @@
     (use-package cider
       :init
       (progn
-                                        ;(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+        ;; (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
         (add-hook 'cider-repl-mode-hook 'subword-mode)
-                                        ;(use-package slamhound)
+                                        ;;(use-package slamhound)
 	)
       :config
       (progn
@@ -465,7 +465,8 @@
     (define-key clojure-mode-map (kbd "s-[") 'cider-jump-back)
     (define-key clojure-mode-map (kbd "s-.")         'lispy-describe-inline)
     (define-key clojure-mode-map (kbd "s-,")         'lispy-arglist-inline) 
-    (define-key clojure-mode-map (kbd "s-m")         'lispy-eval-and-comment)
+    (define-key clojure-mode-map (kbd "s-m")         'cider-macroexpand-1) 
+    (setq cider-macroexpansion-print-metadata t) 
     (define-key clojure-mode-map (kbd "s-SPC" )      'cider-pprint-eval-defun-at-point )
     (define-key clojure-mode-map (kbd "s-\\"  )      'cider-eval-defun-at-point        )
     (define-key clojure-mode-map (kbd "s-n"   )      'cider-eval-ns-form)
@@ -571,15 +572,15 @@
 (dolist (mode '(clojure-mode clojurescript-mode cider-mode))
   (eval-after-load mode
     (font-lock-add-keywords
-     mode '(("(\\(fn\\)[\[[:space:]]"  ; anon funcs 1
+     mode '(("(\\(fn\\)[\[[:space:]]"  ;; anon funcs 1
              (0 (progn (compose-region (match-beginning 1)
                                        (match-end 1) "λ")
                        nil)))
-            ("\\(#\\)("                ; anon funcs 2
+            ("\\(#\\)("                ;; anon funcs 2
              (0 (progn (compose-region (match-beginning 1)
                                        (match-end 1) "ƒ")
                        nil)))
-            ("\\(#\\){"                 ; sets
+            ("\\(#\\){"                ;; sets
              (0 (progn (compose-region (match-beginning 1)
                                        (match-end 1) "∈")
                        nil)))))))
@@ -618,7 +619,7 @@
     (evil-define-key 'normal robe-mode-map (kbd "g f") 'robe-jump)
     (evil-define-key 'normal robe-mode-map (kbd "g d") 'robe-doc)
     
-    ;(add-hook 'robe-mode-hook 'ac-robe-setup) ; TODOcompletion with company
+    ;;(add-hook 'robe-mode-hook 'ac-robe-setup) ;; TODOcompletion with company
     (eval-after-load 'company
       '(add-to-list 'company-backends 'company-robe)
       )
@@ -679,25 +680,25 @@
 (use-package elpy
   :config
   (progn
-    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
+    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ;; TODO do this for - in lisp etc (makes _ a word char)
     (evil-leader/set-key-for-mode 'python-mode "wo" 'pyvenv-workon)
     (add-hook 'python-mode-hook #'(lambda () (elpy-enable)))
 
     (evil-define-key 'normal python-mode-map (kbd "s-r" ) 'python-shell-send-region      )
     (evil-define-key 'normal python-mode-map (kbd "s-\\ s-\\" ) 'python-shell-send-defun )
 
-    )) ; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
+    )) ;; doing this in a hook because I'm afraid of enabling elpy as soon as emacs starts
 
-;(use-package jedi
-;  :config
-;  (progn
-;    (add-hook 'python-mode-hook 'jedi:setup)
-;    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ; TODO do this for - in lisp etc (makes _ a word char)
-;    (setq jedi:complete-on-dot t)))
+;;(use-package jedi
+;;  :config
+;;  (progn
+;;    (add-hook 'python-mode-hook 'jedi:setup)
+;;    (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))) ;; TODO do this for - in lisp etc (makes _ a word char)
+;;    (setq jedi:complete-on-dot t)))
 
 
 ;;;;;;;;;;;;;;;;;;;
-; custom set crap ;
+;; custom set crap ;
 ;;;;;;;;;;;;;;;;;;;
 
 (custom-set-variables
