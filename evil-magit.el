@@ -39,7 +39,7 @@
                                         ;(define-key map (kbd "C-x 4 a") 'magit-add-change-log-entry-other-window)
                                         ;(define-key map (kbd "L") 'magit-add-change-log-entry)
       (define-key map (kbd "RET") 'magit-diff-visit-file)
-      (define-key map (kbd "C-return") 'magit-diff-visit-file-worktree)
+      (define-key map (kbd "<C-return>") 'magit-diff-visit-file-worktree)
                                         ;(define-key map (kbd "C-<return>") 'magit-dired-jump)
                                         ;(define-key map (kbd "SPC") 'magit-show-item-or-scroll-up)
                                         ;(define-key map (kbd "DEL") 'magit-show-item-or-scroll-down)
