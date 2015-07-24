@@ -150,6 +150,7 @@
       map)
     "Keymap for `magit-file-section'.")
 
+
   (defvar magit-hunk-section-map
     (let ((map (make-sparse-keymap)))
       (define-key map [C-return] 'magit-diff-visit-file-worktree)
@@ -221,6 +222,16 @@
                                         ;(define-key map (kbd "j") 'magit-jump-to-diffstats)
       map)
     "Keymap for `magit-commit-mode'.")  ;; from older magit ... checkme
+
+  (defvar with-editor-mode-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map "<C-return>"                   'with-editor-finish)
+      ;; (define-key map [remap server-edit]          'with-editor-finish)
+      (define-key map "<C-\>"                        'with-editor-cancel)
+      ;; (define-key map [remap kill-buffer]          'with-editor-cancel)
+      ;; (define-key map [remap ido-kill-buffer]      'with-editor-cancel)
+      ;; (define-key map [remap iswitchb-kill-buffer] 'with-editor-cancel)
+      map))
 
   (eval-after-load "git-commit-mode"
     '(define-key git-commit-mode-map (kbd "<C-return>") 'with-editor-finish))
