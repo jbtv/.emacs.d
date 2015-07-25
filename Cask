@@ -84,7 +84,7 @@
 (depends-on "idle-highlight-mode")
 (depends-on "yaml-mode" :git "git@github.com:yoshiki/yaml-mode.git" :ref "master")
 
-(depends-on "magit")
+(depends-on "magit" :git "git@github.com:magit/magit.git" :ref "2.1.0")
 (depends-on "git-gutter")
 (depends-on "github-browse-file")
 
