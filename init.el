@@ -101,6 +101,8 @@
       browse-url-generic-program "google-chrome"
       browse-url-generic-args '( "--incognito" ))  
 
+(evil-leader/set-key ",b" 'browse-url-at-point)
+
 (use-package github-browse-file
   :init
   (progn
