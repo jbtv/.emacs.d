@@ -1,4 +1,4 @@
-(require 'cask "~/.cask/cask.el")
+(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 (cask-initialize)
 (require 'use-package)
 
@@ -164,8 +164,8 @@
 ; shells, embedded external tools, aliases for environment variables
 
 ; FIXME ... this is very specific to me and I should find another way of doing this
-(load "/home/blake/.sensitive.el")
-(load "~/.emacs.d/mysql.el")
+;;(load "/home/blake/.sensitive.el")
+;;(load "~/.emacs.d/mysql.el")
 
 (use-package inf-mongo
   :config
