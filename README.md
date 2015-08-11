@@ -1,4 +1,4 @@
-# My Emacs config
+# IRIS.TV Emacs config
 
 #### Evil
 
