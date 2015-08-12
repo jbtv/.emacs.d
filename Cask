@@ -11,7 +11,6 @@
 (depends-on "evil-surround")
 (depends-on "evil-smartparens")
 (depends-on "ace-jump-mode")
-(depends-on "aggressive-indent")
 
 ;; colors! (didn't work for me)
 ;; (depends-on "load-theme-buffer-local")
