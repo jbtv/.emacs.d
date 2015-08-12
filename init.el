@@ -612,8 +612,8 @@
                                        (match-end 1) "∈")
                        nil)))))))
 
-(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-(add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+;;(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+;;(add-hook 'clojure-mode-hook 'prettify-symbols-mode)
 
 
 ;;;;;;;;;;;;
