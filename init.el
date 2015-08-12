@@ -445,7 +445,8 @@
   :config
   (progn
     (sp-with-modes '(clojure-mode emacs-lisp-mode)
-      (sp-local-pair "'" nil :actions nil)))) ; for lisp modes do not treat single-quote as a pairing
+      (sp-pair "'" nil :actions :rem)
+      (sp-pair "`" nil :actions :rem)))) ; for lisp modes do not treat single-quote as a pairing
 
                                         ;(use-package irony-eldoc)
 ;(use-package company-irony)
