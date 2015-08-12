@@ -522,45 +522,6 @@
 
     ;; there's Greek, Lao, Arabic
     
-
-    (setq clojure--prettify-symbols-alist
-          '(("fn"         . ?λ )
-            ("comp"       . ?∘ )
-            ("filter"     . ?Ƒ )
-            ("not="       . ?≠ )
-            ("some"       . ?∃ )
-            ("none?"      . ?∄ )
-            ("map"        . ?∀ )
-            ("true"       . ?𝐓 )
-            ("false"      . ?𝐅 )
-            ("cons"       . ?« )
-            ("and"        . ?∧ )
-            ("or"         . ?∨ )
-            ("<="         . ?≤ )
-            (">="         . ?≥ )
-            ("partial"    . ?⋈ )
-            ("loop"       . ?◎ )
-            ("recur"      . ?◉ )
-            ("reduce"     . ?∑ )
-            ("chan"       . ?≋ )
-            ("complement" . ?∁ )
-            ("identical?" . ?≡ )
-            ;;("->" . ?→)
-            ;;("->>" . ?⇒)
-            ;("<!" . ?⪡) ;; wtf happened here? same font Menlo-Regular.ttf, doesn't have these unicode chars on my new workstation
-            ;(">!" . ?⪢ )
-            ;("<!!" . ?⫷ )
-            ;(">!!" . ?⫸ )
-            ;("" . ?◉ )
-            ;("" . ?⧬ )
-            ;("" . ?⧲ )
-            ;("" . ?⚇ )
-            ;("" . ?◍ )
-            ;⟅ ⟆ ⦓ ⦔ ⦕ ⦖ ⸦ ⸧ ⸨ ⸩ ｟ ｠ ⧘ ⧙ ⧚ ⧛ ︷ ︸
-            ;∾ ⊺ ⋔ ⫚ ⟊ ⟔ ⟓ ⟡ ⟢ ⟣ ⟤ ⟥
-            ;("" . ? )
-            ))
-
     (defun toggle-nrepl-buffer ()
       "Toggle the nREPL REPL on and off"
       (interactive)
